@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+    <head>
+        <meta name="dtb:uid" content="e4be0181-7160-4e93-8af0-1fae8b7a3caf"/>
+        <meta name="dtb:depth" content="2"/>
+        <meta name="dtb:totalPageCount" content="0"/>
+        <meta name="dtb:maxPageNumber" content="0"/>
+    </head>
+    <docTitle>
+        <text>Title of the Book</text>
+    </docTitle>
+    <navMap>
+      <navPoint id="frontmatter" playOrder="1">
+    <navLabel><text>Frontmatter</text></navLabel>
+    <content src="frontmatter_fragment.html"/>
+</navPoint>
+<navPoint id="a_chapter" playOrder="2">
+    <navLabel><text>Chapter 1</text></navLabel>
+    <content src="a_chapter_fragment.html"/>
+</navPoint>
+    </navMap>
+</ncx>
