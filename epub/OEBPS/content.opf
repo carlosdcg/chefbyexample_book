@@ -2,13 +2,13 @@
 <package unique-identifier="BookID" version="3.0" xmlns="http://www.idpf.org/2007/opf">
   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
       xmlns:opf="http://www.idpf.org/2007/opf">
-      <dc:title>Title of the Book</dc:title>
+      <dc:title>Chef by example</dc:title>
       <dc:language>en</dc:language>
-      <dc:rights>Copyright (c) 2015 Author Name</dc:rights>
-      <dc:creator>Author Name</dc:creator>
+      <dc:rights>Copyright (c) 2015 Carlos Camacho</dc:rights>
+      <dc:creator>Carlos Camacho</dc:creator>
       <dc:publisher>Softcover</dc:publisher>
       <dc:identifier id="BookID">urn:uuid:e4be0181-7160-4e93-8af0-1fae8b7a3caf</dc:identifier>
-      <meta property="dcterms:modified">2015-08-28T09:13:46Z</meta>
+      <meta property="dcterms:modified">2015-08-28T16:11:55Z</meta>
       <meta name="cover" content="img-cover-jpg"/>
   </metadata>
   <manifest>

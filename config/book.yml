@@ -1,10 +1,10 @@
 ---
 slug: chefbyexample
 filename: chefbyexample
-title: Title of the Book
-subtitle: Change me
-description: Change me.
-author: Author Name
+title: Chef by example
+subtitle: Practical Exercises in a Successful Chef Deployment.
+description: "A Chef Style DevOps Kung-fu implementation, inspired in the Adam Jacob keynote from Chefconf 2015. A practical roadmap to deal with software developers, infrastructure, continous delivery, automation and the lack of coffee in the office."
+author: Carlos Camacho
 copyright: 2015
 uuid: e4be0181-7160-4e93-8af0-1fae8b7a3caf
 pdf_preview_page_range: 1..30

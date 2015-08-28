@@ -1,15 +1,15 @@
 This is tralics 2.15.1, a LaTeX to XML translator, running on chefstation
 Copyright INRIA/MIAOU/APICS/MARELLE 2002-2012, Jos\'e Grimm
 Licensed under the CeCILL Free Software Licensing Agreement
-Starting translation of file /tmp/polytex20150828-26118-98a86b.tex.
+Starting translation of file /tmp/polytex20150828-29067-11svp5a.tex.
 Dummy default configuration file used.
 Bib stats: seen 0 entries.
 Math stats: formulas 0, kernels 0, trivial 0, \mbox 0, large 0, small 0.
-Buffer realloc 1, string 1368, size 12957, merge 0
+Buffer realloc 1, string 1368, size 12967, merge 0
 Macros created 197, deleted 10; hash size 2387; foonotes 0.
 Save stack +20 -20.
 Attribute list search 1514(1505) found 1073 in 1123 elements (1120 at boot).
 Number of ref 0, of used labels 0, of defined labels 0, of ext. ref. 0.
-Output written on /tmp/polytex20150828-26118-98a86b.xml (212 bytes).
+Output written on /tmp/polytex20150828-29067-11svp5a.xml (212 bytes).
 No error found.
-(For more information, see transcript file /tmp/polytex20150828-26118-98a86b.log)
+(For more information, see transcript file /tmp/polytex20150828-29067-11svp5a.log)
