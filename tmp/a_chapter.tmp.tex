@@ -2,6 +2,50 @@
 
 \label{cha:a_chapter}
 
+\begin{itemize}
+\item General configuration structure for the chef-repo:
+
+
+\begin{itemize}
+\item chef-repo/environments/banana.rb
+\item chef-repo/environments/potato.rb
+\item chef-repo/environments/kiwi.rb
+\item chef-repo/data\_bags/banana.rb
+\item chef-repo/data\_bags/potato.rb
+\item chef-repo/data\_bags/kiwi.rb: 
+\item chef-repo/roles/base.rb
+\item chef-repo/roles/web.rb
+\item chef-repo/roles/db.rb
+\end{itemize}
+\item Banana cookbook structure:
+
+
+\begin{itemize}
+\item chef-repo/cookbooks/banana/templates/default/*.erb
+\item chef-repo/cookbooks/banana/attributes/default.rb
+\end{itemize}
+\item Potato cookbook structure:
+
+
+\begin{itemize}
+\item chef-repo/cookbooks/potato/templates/default/*.erb
+\item chef-repo/cookbooks/potato/attributes/default.rb
+\end{itemize}
+\end{itemize}
+
+-Kiwi cookbook structure:
+    * chef-repo/cookbooks/kiwi/templates/default/*.erb
+    * chef-repo/cookbooks/kiwi/attributes/default.rb
+
+A node belongs to an environment in which case, will override the default configuration per the corresponding one.
+
+Override app attributes for kiwi (Non sensitive info)
+Override app attributes for kiwi (Sensitive info)
+Define the recipes for the xxx role
+
+Default configuration templates for kiwi
+Default configuration values according the templates for kiwi
+
 This is the first paragraph of the Softcover Markdown template produced with the \softcover\ command-line interface. It shows how to write a document in Markdown, a lightweight markup language, augmented with the \href{http://kramdown.gettalong.org/}{kramdown} converter and some custom extensions, including support for embedded \PolyTeX, a subset of the powerful \LaTeX\ typesetting system.\footnote{Pronunciations of ``LaTeX'' differ, but \emph{lay}-tech is the one I prefer.} For more information, see \href{http://manual.softcover.io/book}{\emph{The Softcover Book}}. To learn how to easily publish (and optionally sell) documents produced with Softcover, visit \href{http://softcover.io/}{Softcover.io}.
 
 This is the \emph{second} paragraph, showing how to emphasize text.\footnote{This is a footnote. It is numbered automatically.} You can also make text \textbf{bold} or \emph{emphasize a second way}. Via embedded \PolyTeX, Softcover also supports colored text, such as \coloredtext{red}{red}, \coloredtext{CornflowerBlue}{cornflower blue}, and \coloredtexthtml{E8AB3A}{arbitrary HTML colors}.
@@ -126,12 +170,12 @@ Softcover comes with a command-line interface called \kode{softcover}. To get mo
 \begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
 \PY{g+gp}{\PYZdl{}} softcover \PY{n+nb}{help}
 \PY{g+go}{Commands:}
-\PY{g+go}{  softcover build, build:all           \PYZsh{} Build all formats}
-\PY{g+go}{  softcover build:epub                 \PYZsh{} Build EPUB}
-\PY{g+go}{  softcover build:html                 \PYZsh{} Build HTML}
-\PY{g+go}{  softcover build:mobi                 \PYZsh{} Build MOBI}
-\PY{g+go}{  softcover build:pdf                  \PYZsh{} Build PDF}
-\PY{g+go}{  softcover build:preview              \PYZsh{} Build book preview in all formats}
+\PY{g+go}{  softcover build, build:all       \PYZsh{} Build all formats}
+\PY{g+go}{  softcover build:epub         \PYZsh{} Build EPUB}
+\PY{g+go}{  softcover build:html         \PYZsh{} Build HTML}
+\PY{g+go}{  softcover build:mobi         \PYZsh{} Build MOBI}
+\PY{g+go}{  softcover build:pdf          \PYZsh{} Build PDF}
+\PY{g+go}{  softcover build:preview          \PYZsh{} Build book preview in all formats}
 \PY{g+go}{  .}
 \PY{g+go}{  .}
 \PY{g+go}{  .}

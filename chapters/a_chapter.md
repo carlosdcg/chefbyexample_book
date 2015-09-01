@@ -1,6 +1,56 @@
 # The first chapter
 \label{cha:a_chapter}
 
+
+
+
+
+- General configuration structure for the chef-repo:
+    * chef-repo/environments/banana.rb
+    * chef-repo/environments/potato.rb
+    * chef-repo/environments/kiwi.rb
+    * chef-repo/data_bags/banana.rb
+    * chef-repo/data_bags/potato.rb
+    * chef-repo/data_bags/kiwi.rb: 
+    * chef-repo/roles/base.rb
+    * chef-repo/roles/web.rb
+    * chef-repo/roles/db.rb
+
+- Banana cookbook structure:
+    * chef-repo/cookbooks/banana/templates/default/*.erb
+    * chef-repo/cookbooks/banana/attributes/default.rb
+
+- Potato cookbook structure:
+    * chef-repo/cookbooks/potato/templates/default/*.erb
+    * chef-repo/cookbooks/potato/attributes/default.rb
+
+-Kiwi cookbook structure:
+    * chef-repo/cookbooks/kiwi/templates/default/*.erb
+    * chef-repo/cookbooks/kiwi/attributes/default.rb
+
+A node belongs to an environment in which case, will override the default configuration per the corresponding one.
+
+
+
+Override app attributes for kiwi (Non sensitive info)
+Override app attributes for kiwi (Sensitive info)
+Define the recipes for the xxx role
+
+Default configuration templates for kiwi
+Default configuration values according the templates for kiwi
+
+
+
+
+
+
+
+
+
+
+
+
+
 This is the first paragraph of the Softcover Markdown template produced with the \softcover\ command-line interface. It shows how to write a document in Markdown, a lightweight markup language, augmented with the [kramdown](http://kramdown.gettalong.org/) converter and some custom extensions, including support for embedded \PolyTeX, a subset of the powerful \LaTeX\ typesetting system.[^pronunciation] For more information, see [*The Softcover Book*](http://manual.softcover.io/book). To learn how to easily publish (and optionally sell) documents produced with Softcover, visit [Softcover.io](http://softcover.io/).
 
 This is the *second* paragraph, showing how to emphasize text.[^sample-footnote] You can also make text **bold** or _emphasize a second way_. Via embedded \PolyTeX, Softcover also supports colored text, such as \coloredtext{red}{red}, \coloredtext{CornflowerBlue}{cornflower blue}, and \coloredtexthtml{E8AB3A}{arbitrary HTML colors}.
@@ -103,12 +153,12 @@ Softcover comes with a command-line interface called `softcover`. To get more in
 ```console
 $ softcover help
 Commands:
-  softcover build, build:all           # Build all formats
-  softcover build:epub                 # Build EPUB
-  softcover build:html                 # Build HTML
-  softcover build:mobi                 # Build MOBI
-  softcover build:pdf                  # Build PDF
-  softcover build:preview              # Build book preview in all formats
+  softcover build, build:all       # Build all formats
+  softcover build:epub         # Build EPUB
+  softcover build:html         # Build HTML
+  softcover build:mobi         # Build MOBI
+  softcover build:pdf          # Build PDF
+  softcover build:preview          # Build book preview in all formats
   .
   .
   .
