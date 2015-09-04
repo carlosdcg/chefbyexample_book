@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link href="stylesheets/pygments.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/softcover.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/custom.css" media="screen" rel="stylesheet" type="text/css" />
+    
+    <title>chefbyexample</title>
+    
+      <script type="text/x-mathjax-config">
+              MathJax.Hub.Config({
+        "HTML-CSS": {
+          availableFonts: ["TeX"],
+        },
+        TeX: {
+          extensions: ["AMSmath.js", "AMSsymbols.js"],
+          equationNumbers: {
+            autoNumber: "AMS",
+            formatNumber: function (n) { return "6" + '.adfadsfa  ' + n }
+          },
+          Macros: {
+            PolyTeX:    "Poly{\\TeX}",
+            PolyTeXnic: "Poly{\\TeX}nic",
+            "softcover": "\\texttt{softcover}",
+"unitvec": ["{\\hat #1}", 1]
+          }
+        },
+        showProcessingMessages: false,
+        messageStyle: "none",
+        imageFont: null
+      });
+
+      </script>
+      <script type="text/javascript" src="MathJax/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+    
+  </head>
+  <body>
+    
+    <div id="book">
+      <div id="cid28" data-tralics-id="cid28" class="chapter" data-number="6" data-chapter="chapter_6"><h1><a href="chapter_6.html#cid28" class="heading hyperref"><span class="number">Chapter 6 </span>Maintenance cycle</a></h1>
+<ul><li>General configuration structure for the chef-repo:
+<ul><li>chef-repo/environments/banana.rb
+</li>
+<li>chef-repo/environments/potato.rb
+</li>
+<li>chef-repo/environments/kiwi.rb
+</li>
+<li>chef-repo/data_bags/banana.rb
+</li>
+<li>chef-repo/data_bags/potato.rb
+</li>
+<li>chef-repo/data_bags/kiwi.rb:
+</li>
+<li>chef-repo/roles/base.rb
+</li>
+<li>chef-repo/roles/web.rb
+</li>
+<li>chef-repo/roles/db.rb
+</li></ul></li>
+<li>Banana cookbook structure:
+<ul><li>chef-repo/cookbooks/banana/templates/default/*.erb
+</li>
+<li>chef-repo/cookbooks/banana/attributes/default.rb
+</li></ul></li>
+<li>Potato cookbook structure:
+<ul><li>chef-repo/cookbooks/potato/templates/default/*.erb
+</li>
+<li>chef-repo/cookbooks/potato/attributes/default.rb
+</li></ul></li></ul><p>-Kiwi cookbook structure:
+* chef-repo/cookbooks/kiwi/templates/default/*.erb
+* chef-repo/cookbooks/kiwi/attributes/default.rb</p>
+<p>A node belongs to an environment in which case, will override the default configuration per the corresponding one.</p>
+<p>Override app attributes for kiwi (Non sensitive info)
+Override app attributes for kiwi (Sensitive info)
+Define the recipes for the xxx role</p>
+<p>Default configuration templates for kiwi
+Default configuration values according the templates for kiwi</p>
+</div>
+    </div>
+  </body>
+</html>

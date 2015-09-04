@@ -1,0 +1,45 @@
+\chapter{Maintenance cycle}
+
+\begin{itemize}
+\item General configuration structure for the chef-repo:
+
+
+\begin{itemize}
+\item chef-repo/environments/banana.rb
+\item chef-repo/environments/potato.rb
+\item chef-repo/environments/kiwi.rb
+\item chef-repo/data\_bags/banana.rb
+\item chef-repo/data\_bags/potato.rb
+\item chef-repo/data\_bags/kiwi.rb: 
+\item chef-repo/roles/base.rb
+\item chef-repo/roles/web.rb
+\item chef-repo/roles/db.rb
+\end{itemize}
+\item Banana cookbook structure:
+
+
+\begin{itemize}
+\item chef-repo/cookbooks/banana/templates/default/*.erb
+\item chef-repo/cookbooks/banana/attributes/default.rb
+\end{itemize}
+\item Potato cookbook structure:
+
+
+\begin{itemize}
+\item chef-repo/cookbooks/potato/templates/default/*.erb
+\item chef-repo/cookbooks/potato/attributes/default.rb
+\end{itemize}
+\end{itemize}
+
+-Kiwi cookbook structure:
+    * chef-repo/cookbooks/kiwi/templates/default/*.erb
+    * chef-repo/cookbooks/kiwi/attributes/default.rb
+
+A node belongs to an environment in which case, will override the default configuration per the corresponding one.
+
+Override app attributes for kiwi (Non sensitive info)
+Override app attributes for kiwi (Sensitive info)
+Define the recipes for the xxx role
+
+Default configuration templates for kiwi
+Default configuration values according the templates for kiwi
