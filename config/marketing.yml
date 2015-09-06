@@ -5,6 +5,16 @@ authors:
     bio:
         Author bio [link](https://www.carlosdcg.com)
 
+faq:
+  -
+    question: "What is included in this book"
+    answer: "A practical roadmap for Chef"
+
+    question: "What is included in this book"
+    answer: "A practical roadmap for Chef"
+
+
+
 
 repo_url: 'https://github.com/carlosdcg/chefbyexample_book'
 contact_email: 'carloscamachoucv@gmail.com'
