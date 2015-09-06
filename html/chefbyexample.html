@@ -51,7 +51,8 @@ continuous delivery, automation and the lack of coffee in the office…</p>
 how we build and operate high velocity organizations, born
 from the experience of its practitioners.</p>
 <p>Principles (Universal)</p>
-<ul><li>Based on prioritize people over products over companies.<span class="intersentencespace"></span>
+<ul>
+<li>Based on prioritize people over products over companies.<span class="intersentencespace"></span>
 </li>
 <li>Design for the safety, contentment, knowledge and freedom of both your peers and your customers.<span class="intersentencespace"></span>
 </li>
@@ -76,7 +77,8 @@ from the experience of its practitioners.</p>
 <li>Improve and do things right even if is hard (At first).<span class="intersentencespace"></span>
 </li>
 <li>Make decisions based on your experience and proof your point of view.<span class="intersentencespace"></span>
-</li></ul><p>Forms (Shared)</p>
+</li></ul>
+<p>Forms (Shared)</p>
 <p>Applications (Unique)</p>
 <p>A unique approach, based in previous experience focused on customers.</p>
 <p>The excellence achieved thought long practice in one’s skill</p>
@@ -164,8 +166,10 @@ from the experience of its practitioners.</p>
 <p>a</p>
 </div>
 <div id="cid28" data-tralics-id="cid28" class="chapter" data-number="6"><h1><a href="#cid28" class="heading hyperref"><span class="number">Chapter 6 </span>Maintenance cycle</a></h1>
-<ul><li>General configuration structure for the chef-repo:
-<ul><li>chef-repo/environments/banana.rb
+<ul>
+<li>General configuration structure for the chef-repo:
+<ul>
+<li>chef-repo/environments/banana.rb
 </li>
 <li>chef-repo/environments/potato.rb
 </li>
@@ -182,17 +186,23 @@ from the experience of its practitioners.</p>
 <li>chef-repo/roles/web.rb
 </li>
 <li>chef-repo/roles/db.rb
-</li></ul></li>
+</li></ul>
+</li>
 <li>Banana cookbook structure:
-<ul><li>chef-repo/cookbooks/banana/templates/default/*.erb
+<ul>
+<li>chef-repo/cookbooks/banana/templates/default/*.erb
 </li>
 <li>chef-repo/cookbooks/banana/attributes/default.rb
-</li></ul></li>
+</li></ul>
+</li>
 <li>Potato cookbook structure:
-<ul><li>chef-repo/cookbooks/potato/templates/default/*.erb
+<ul>
+<li>chef-repo/cookbooks/potato/templates/default/*.erb
 </li>
 <li>chef-repo/cookbooks/potato/attributes/default.rb
-</li></ul></li></ul><p>-Kiwi cookbook structure:
+</li></ul>
+</li></ul>
+<p>-Kiwi cookbook structure:
 * chef-repo/cookbooks/kiwi/templates/default/*.erb
 * chef-repo/cookbooks/kiwi/attributes/default.rb</p>
 <p>A node belongs to an environment in which case, will override the default configuration per the corresponding one.</p>

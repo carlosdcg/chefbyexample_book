@@ -8,7 +8,7 @@
       <dc:creator>Carlos Camacho</dc:creator>
       <dc:publisher>Softcover</dc:publisher>
       <dc:identifier id="BookID">urn:uuid:e4be0181-7160-4e93-8af0-1fae8b7a3caf</dc:identifier>
-      <meta property="dcterms:modified">2015-09-01T17:07:16Z</meta>
+      <meta property="dcterms:modified">2015-09-06T19:24:12Z</meta>
       <meta name="cover" content="img-cover-jpg"/>
   </metadata>
   <manifest>
@@ -22,17 +22,12 @@
       <item id="custom_epub.css" href="styles/custom_epub.css" media-type="text/css"/>
       <item id="cover" href="cover.html" media-type="application/xhtml+xml"/>
       <item id="frontmatter" href="frontmatter_fragment.html" media-type="application/xhtml+xml"/>
-<item id="a_chapter" href="a_chapter_fragment.html" media-type="application/xhtml+xml"/>
-      <item id="img-01_michael_hartl_headshot-jpg" href="images/01_michael_hartl_headshot.jpg" media-type="image/jpeg"/>
-<item id="img-e16131c8430b545498d8dfde98dfa1400ed99b4b-png" href="images/texmath/e16131c8430b545498d8dfde98dfa1400ed99b4b.png" media-type="image/png"/>
-<item id="img-85605cccea26031c88cc545a1f590e53513b3f90-png" href="images/texmath/85605cccea26031c88cc545a1f590e53513b3f90.png" media-type="image/png"/>
-<item id="img-065df544c15f6cca3abfbaad872dfe51412e46f3-png" href="images/texmath/065df544c15f6cca3abfbaad872dfe51412e46f3.png" media-type="image/png"/>
-<item id="img-ffdee9b2fbb184ce5688cb5b9dfb98c3127c4db3-png" href="images/texmath/ffdee9b2fbb184ce5688cb5b9dfb98c3127c4db3.png" media-type="image/png"/>
-<item id="img-cover-jpg" href="images/cover.jpg" media-type="image/jpeg"/>
+<item id="chapter_1" href="chapter_1_fragment.html" media-type="application/xhtml+xml"/>
+      <item id="img-cover-jpg" href="images/cover.jpg" media-type="image/jpeg"/>
   </manifest>
   <spine toc="ncx">
     <itemref idref="cover" linear="no" />
     <itemref idref="frontmatter"/>
-<itemref idref="a_chapter"/>
+<itemref idref="chapter_1"/>
   </spine>
 </package>
