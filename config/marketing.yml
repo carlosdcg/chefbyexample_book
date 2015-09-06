@@ -1,3 +1,12 @@
+authors:
+  -
+    name: "Carlos Camacho"
+    contact_email: "carloscamachoucv@gmail.com"
+    bio:
+        Author bio [link](https://www.carlosdcg.com)
+
+
 repo_url: 'https://github.com/carlosdcg/chefbyexample_book'
 contact_email: 'carloscamachoucv@gmail.com'
-hide_custom_domain_footer: true
+hide_custom_domain_footer: false
+
