@@ -1,3 +1,0 @@
-
-#Automating delivery pipelines
-a

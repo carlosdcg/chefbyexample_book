@@ -14,9 +14,9 @@
     <navLabel><text>Frontmatter</text></navLabel>
     <content src="frontmatter_fragment.html"/>
 </navPoint>
-<navPoint id="chapter_1" playOrder="2">
+<navPoint id="chapter_01_intro" playOrder="2">
     <navLabel><text>Chapter 1</text></navLabel>
-    <content src="chapter_1_fragment.html"/>
+    <content src="chapter_01_intro_fragment.html"/>
 </navPoint>
     </navMap>
 </ncx>

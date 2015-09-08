@@ -8,7 +8,7 @@
       <dc:creator>Carlos Camacho</dc:creator>
       <dc:publisher>Softcover</dc:publisher>
       <dc:identifier id="BookID">urn:uuid:e4be0181-7160-4e93-8af0-1fae8b7a3caf</dc:identifier>
-      <meta property="dcterms:modified">2015-09-06T20:37:39Z</meta>
+      <meta property="dcterms:modified">2015-09-08T15:31:54Z</meta>
       <meta name="cover" content="img-cover-jpg"/>
   </metadata>
   <manifest>
@@ -22,12 +22,12 @@
       <item id="custom_epub.css" href="styles/custom_epub.css" media-type="text/css"/>
       <item id="cover" href="cover.html" media-type="application/xhtml+xml"/>
       <item id="frontmatter" href="frontmatter_fragment.html" media-type="application/xhtml+xml"/>
-<item id="chapter_1" href="chapter_1_fragment.html" media-type="application/xhtml+xml"/>
+<item id="chapter_01_intro" href="chapter_01_intro_fragment.html" media-type="application/xhtml+xml"/>
       <item id="img-cover-jpg" href="images/cover.jpg" media-type="image/jpeg"/>
   </manifest>
   <spine toc="ncx">
     <itemref idref="cover" linear="no" />
     <itemref idref="frontmatter"/>
-<itemref idref="chapter_1"/>
+<itemref idref="chapter_01_intro"/>
   </spine>
 </package>
