@@ -8,7 +8,7 @@
       <dc:creator>Carlos Camacho</dc:creator>
       <dc:publisher>Softcover</dc:publisher>
       <dc:identifier id="BookID">urn:uuid:e4be0181-7160-4e93-8af0-1fae8b7a3caf</dc:identifier>
-      <meta property="dcterms:modified">2015-09-08T15:31:54Z</meta>
+      <meta property="dcterms:modified">2015-09-09T16:59:07Z</meta>
       <meta name="cover" content="img-cover-jpg"/>
   </metadata>
   <manifest>
@@ -23,7 +23,19 @@
       <item id="cover" href="cover.html" media-type="application/xhtml+xml"/>
       <item id="frontmatter" href="frontmatter_fragment.html" media-type="application/xhtml+xml"/>
 <item id="chapter_01_intro" href="chapter_01_intro_fragment.html" media-type="application/xhtml+xml"/>
-      <item id="img-cover-jpg" href="images/cover.jpg" media-type="image/jpeg"/>
+      <item id="img-04_install_chef-PNG" href="images/figures/04_install_chef.PNG" media-type="image/PNG"/>
+<item id="img-09_install_chef_reporting-PNG" href="images/figures/09_install_chef_reporting.PNG" media-type="image/PNG"/>
+<item id="img-08_install_chef_push_jobs-PNG" href="images/figures/08_install_chef_push_jobs.PNG" media-type="image/PNG"/>
+<item id="img-02_host_name-png" href="images/figures/02_host_name.png" media-type="image/png"/>
+<item id="img-11_install_chef_add_org-PNG" href="images/figures/11_install_chef_add_org.PNG" media-type="image/PNG"/>
+<item id="img-01_host_name-png" href="images/figures/01_host_name.png" media-type="image/png"/>
+<item id="img-05_install_chef_config-PNG" href="images/figures/05_install_chef_config.PNG" media-type="image/PNG"/>
+<item id="img-10_install_chef_add_user-PNG" href="images/figures/10_install_chef_add_user.PNG" media-type="image/PNG"/>
+<item id="img-03_install_chef-PNG" href="images/figures/03_install_chef.PNG" media-type="image/PNG"/>
+<item id="img-07_install_chef_web_ui-PNG" href="images/figures/07_install_chef_web_ui.PNG" media-type="image/PNG"/>
+<item id="img-12_install_chef_finished-PNG" href="images/figures/12_install_chef_finished.PNG" media-type="image/PNG"/>
+<item id="img-06_install_chef_api-PNG" href="images/figures/06_install_chef_api.PNG" media-type="image/PNG"/>
+<item id="img-cover-jpg" href="images/cover.jpg" media-type="image/jpeg"/>
   </manifest>
   <spine toc="ncx">
     <itemref idref="cover" linear="no" />

@@ -10,12 +10,115 @@
 </div><div id="cid22" data-tralics-id="cid22" class="section" data-number="2.9"><h2><a href="chapter_02_chef_fragment.html#cid22" class="heading hyperref"><span class="number">2.9 </span>Recipes</a></h2>
 </div><div id="cid23" data-tralics-id="cid23" class="section" data-number="2.10"><h2><a href="chapter_02_chef_fragment.html#cid23" class="heading hyperref"><span class="number">2.10 </span>Install CHEF</a></h2>
 <div class="graphics image"><img src="images/figures/01_host_name.png" alt="images/figures/01_host_name" /></div>
-<div class="graphics image"><img src="images/figures/02_host_name.png" alt="images/figures/02_host_name" /></div>
-<div class="graphics image"><img src="images/figures/03_install_chef.PNG" alt="images/figures/03_install_chef" /></div>
-<div class="graphics image"><img src="images/figures/04_install_chef.PNG" alt="images/figures/04_install_chef" /></div>
-<div class="graphics image"><img src="images/figures/05_install_chef_config.PNG" alt="images/figures/05_install_chef_config" /></div>
-<div class="graphics image"><img src="images/figures/06_install_chef_api.PNG" alt="images/figures/06_install_chef_api" /></div>
+<div class="codelisting" id="code-hostname" data-tralics-id="uid17" data-number="2.1"><div class="heading"><span class="number">Listing 2.1</span> 
+
+<span class="description"></span>
+</div>
+
+<div class="code"><div class="highlight"><pre>root@chef01:~# hostname -f
+</pre></div></div></div><div class="graphics image"><img src="images/figures/02_host_name.png" alt="images/figures/02_host_name" /></div>
+<div class="codelisting" id="code-" data-tralics-id="uid18" data-number="2.2"><div class="heading"><span class="number">Listing 2.2</span> 
+
+<span class="description"></span>
+</div>
+
+<div class="code"><div class="highlight"><pre>root@chef01:~# sudo nano /etc/hosts
+</pre></div></div></div><div class="graphics image"><img src="images/figures/03_install_chef.PNG" alt="images/figures/03_install_chef" /></div>
+<div class="codelisting" id="code-" data-tralics-id="uid19" data-number="2.3"><div class="heading"><span class="number">Listing 2.3</span> 
+
+<span class="description"></span>
+</div>
+
+<div class="code"><div class="highlight"><pre>root@chef01:~# wget https://web-dl.packagecloud.io/chef/stable/packages/ubuntu/trusty/chef-server-core_12.2.0-1_amd64.deb
+</pre></div></div></div><div class="graphics image"><img src="images/figures/04_install_chef.PNG" alt="images/figures/04_install_chef" /></div>
+<div class="codelisting" id="code-" data-tralics-id="uid20" data-number="2.4"><div class="heading"><span class="number">Listing 2.4</span> 
+
+<span class="description"></span>
+</div>
+
+<div class="code"><div class="highlight"><pre>root@chef01:~# sudo dpkg -i chef-server-core_*.deb
+</pre></div></div></div><div class="graphics image"><img src="images/figures/05_install_chef_config.PNG" alt="images/figures/05_install_chef_config" /></div>
+<div class="codelisting" id="code-" data-tralics-id="uid21" data-number="2.5"><div class="heading"><span class="number">Listing 2.5</span> 
+
+<span class="description"></span>
+</div>
+
+<div class="code"><div class="highlight"><pre>root@chef01:~# sudo chef-server-ctl reconfigure
+</pre></div></div></div><div class="graphics image"><img src="images/figures/06_install_chef_api.PNG" alt="images/figures/06_install_chef_api" /></div>
+<p>Web interface</p>
 <div class="graphics image"><img src="images/figures/07_install_chef_web_ui.PNG" alt="images/figures/07_install_chef_web_ui" /></div>
-<div class="graphics image"><img src="images/figures/08_install_chef_push_jobs.PNG" alt="images/figures/08_install_chef_push_jobs" /></div>
-<div class="graphics image"><img src="images/figures/09_install_chef_reporting.PNG" alt="images/figures/09_install_chef_reporting" /></div>
+<p>(Premium freature up to 25 nodes..)<span class="intersentencespace"></span></p>
+<div class="codelisting" id="code-" data-tralics-id="uid22" data-number="2.6"><div class="heading"><span class="number">Listing 2.6</span> 
+
+<span class="description"></span>
+</div>
+
+<div class="code"><div class="highlight"><pre>root@chef01:~# chef-server-ctl install opscode-manage<span class="p">;</span> chef-server-ctl reconfigure<span class="p">;</span> opscode-manage-ctl reconfigure
+</pre></div></div></div><div class="graphics image"><img src="images/figures/08_install_chef_push_jobs.PNG" alt="images/figures/08_install_chef_push_jobs" /></div>
+<div class="codelisting" id="code-" data-tralics-id="uid23" data-number="2.7"><div class="heading"><span class="number">Listing 2.7</span> 
+
+<span class="description"></span>
+</div>
+
+<div class="code"><div class="highlight"><pre>root@chef01:~# chef-server-ctl install opscode-push-jobs-server<span class="p">;</span> chef-server-ctl reconfigure<span class="p">;</span> opscode-push-jobs-server-ctl reconfigure<span class="p">;</span>
+</pre></div></div></div><div class="graphics image"><img src="images/figures/09_install_chef_reporting.PNG" alt="images/figures/09_install_chef_reporting" /></div>
+<p>(Premium freature up to 25 nodes..)<span class="intersentencespace"></span></p>
+<div class="codelisting" id="code-" data-tralics-id="uid24" data-number="2.8"><div class="heading"><span class="number">Listing 2.8</span> 
+
+<span class="description"></span>
+</div>
+
+<div class="code"><div class="highlight"><pre>root@chef01:~# chef-server-ctl install opscode-reporting<span class="p">;</span> chef-server-ctl reconfigure<span class="p">;</span> opscode-reporting-ctl reconfigure<span class="p">;</span> 
+</pre></div></div></div><div class="graphics image"><img src="images/figures/10_install_chef_add_user.PNG" alt="images/figures/10_install_chef_add_user" /></div>
+<div class="codelisting" id="code-" data-tralics-id="uid25" data-number="2.9"><div class="heading"><span class="number">Listing 2.9</span> 
+
+<span class="description"></span>
+</div>
+
+<div class="code"><div class="highlight"><pre>root@chef01:~# chef-server-ctl user-create admin the administrator the_good@chefbyexample.com 4dm1n1str4t0r -f admin.pem
+</pre></div></div></div><div class="graphics image"><img src="images/figures/11_install_chef_add_org.PNG" alt="images/figures/11_install_chef_add_org" /></div>
+<div class="codelisting" id="code-" data-tralics-id="uid26" data-number="2.10"><div class="heading"><span class="number">Listing 2.10</span> 
+
+<span class="description"></span>
+</div>
+
+<div class="code"><div class="highlight"><pre>root@chef01:~# sudo chef-server-ctl org-create chefbyexample <span class="s2">"ChefByExample.com"</span> --association_user admin -f chefbyexample-validator.pem
+</pre></div></div></div><div class="graphics image"><img src="images/figures/12_install_chef_finished.PNG" alt="images/figures/12_install_chef_finished" /></div>
+<p>Chef Server installed..</p>
+</div><div id="cid24" data-tralics-id="cid24" class="section" data-number="2.11"><h2><a href="chapter_02_chef_fragment.html#cid24" class="heading hyperref"><span class="number">2.11 </span>Install old and rusty web interface</a></h2>
+<div id="uid27" data-tralics-id="uid27" class="subsection" data-number="2.11.1"><h3><a href="chapter_02_chef_fragment.html#uid27" class="heading hyperref"><span class="number">2.11.1 </span>Get the webui source</a></h3>
+<p>aptitude install git</p>
+<p>mkdir -p /var/www/</p>
+<p>cd /var/www/</p>
+<p>git clone https://github.com/carlosdcg/chef-server-webui</p>
+<p>cd chef-server-webui</p>
+</div>
+<div id="uid28" data-tralics-id="uid28" class="subsection" data-number="2.11.2"><h3><a href="chapter_02_chef_fragment.html#uid28" class="heading hyperref"><span class="number">2.11.2 </span>Install packages</a></h3>
+<p>aptitude install rubygems1.9.1 ruby1.9.1-dev build-essential</p>
+<p>gem install bundler</p>
+<p>bundle install</p>
+<p>update in /var/www/chef-server-webui/config/application.rb</p>
+<pre class="verbatim">config.chef_server_url = "http://127.0.0.1:8000"
+config.rest_client_name = "chef-webui"
+config.rest_client_key = "/etc/chef-server/webui_priv.pem"
+config.admin_user_name =  "admin"
+config.admin_default_password = "p@ssw0rd1"
+config.rest_client_custom_http_headers = {}</pre>
+<p>to</p>
+<pre class="verbatim">config.chef_server_url = "https://127.0.0.1:443"
+config.rest_client_name = "chef-webui"
+config.rest_client_key = "/etc/opscode/webui_priv.pem"
+config.admin_user_name =  "admin"
+config.admin_default_password = "4dm1n1str4t0r"
+config.rest_client_custom_http_headers = {}</pre>
+<p>Change the default attr in /opt/opscode/embedded/cookbooks/private-chef/attributes/default.rb</p>
+<p>default[‘private_chef’][‘opscode-webui’][‘enable’] = false
+to
+default[‘private_chef’][‘opscode-webui’][‘enable’] = true</p>
+<p>default[‘private_chef’][‘default_orgname’] = nil
+to
+default[‘private_chef’][‘default_orgname’] = chefbyexample</p>
+<p>Then run
+chef-server-ctl reconfigure</p>
+</div></div><div id="cid25" data-tralics-id="cid25" class="section" data-number="2.12"><h2><a href="chapter_02_chef_fragment.html#cid25" class="heading hyperref"><span class="number">2.12 </span>Install one Workstation</a></h2>
 </div>
