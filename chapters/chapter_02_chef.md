@@ -156,3 +156,32 @@ Chef Server installed..
 
 
 ##Install one Workstation
+
+
+# GEt CHef DK
+sudo wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.7.0-1_amd64.deb
+
+sudo dpkg -i chefdk_*.deb
+
+sudo chef generate repo chef-repo
+
+mkdir ~/chef-repo/.chef
+scp root@chef01.chefbyexample.com:/root/admin.pem ~/chef-repo/.chef
+scp root@chef01.chefbyexample.com:/root/chefbyexample-validator.pem ~/chef-repo/.chef
+
+nano ~/chef-repo/.chef/knife.rb
+
+
+current_dir = File.dirname(__FILE__)
+log_level                :info
+log_location             STDOUT
+node_name                "admin"
+client_key               "#{current_dir}/admin.pem"
+validation_client_name   "chefbyexample-validator"
+validation_key           "#{current_dir}/chefbyexample-validator.pem"
+chef_server_url          "https://chef01.chefbyexample.com/organizations/chefbyexample"
+syntax_check_cache_path  "#{ENV['HOME']}/.chef/syntaxcache"
+cookbook_path            ["#{current_dir}/../cookbooks"]
+
+
+knife ssl fetch
