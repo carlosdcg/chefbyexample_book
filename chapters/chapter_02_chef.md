@@ -185,3 +185,10 @@ cookbook_path            ["#{current_dir}/../cookbooks"]
 
 
 knife ssl fetch
+
+Bootstraping the first node
+
+knife bootstrap node01.chefbyexample.com -N node01
+
+
+DOne!!!!

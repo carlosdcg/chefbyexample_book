@@ -141,3 +141,30 @@ root@chef01:~# sudo chef-server-ctl org-create chefbyexample "ChefByExample.com"
 Chef Server installed..
 
 \section{Install one Workstation}
+
+\chapter{GEt CHef DK}
+
+sudo wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86\_64/chefdk\_0.7.0-1\_amd64.deb
+
+sudo dpkg -i chefdk\_*.deb
+
+sudo chef generate repo chef-repo
+
+mkdir \ensuremath{\sim}/chef-repo/.chef
+scp root@chef01.chefbyexample.com:/root/admin.pem \ensuremath{\sim}/chef-repo/.chef
+scp root@chef01.chefbyexample.com:/root/chefbyexample-validator.pem \ensuremath{\sim}/chef-repo/.chef
+
+nano \ensuremath{\sim}/chef-repo/.chef/knife.rb
+
+current\_dir = File.dirname(\textbf{FILE})
+log\_level                :info
+log\_location             STDOUT
+node\_name                ``admin''
+client\_key               ``\#\{current\_dir\}/admin.pem''
+validation\_client\_name   ``chefbyexample-validator''
+validation\_key           ``\#\{current\_dir\}/chefbyexample-validator.pem''
+chef\_server\_url          ``https://chef01.chefbyexample.com/organizations/chefbyexample''
+syntax\_check\_cache\_path  ``\#\{ENV[`HOME']\}/.chef/syntaxcache''
+cookbook\_path            [''\#\{current\_dir\}/../cookbooks'']
+
+knife ssl fetch
