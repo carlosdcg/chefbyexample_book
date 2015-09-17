@@ -155,7 +155,7 @@ Chef Server installed..
 
 
 
-##Install one Workstation
+##Install the Workstation
 
 
 \begin{codelisting}
@@ -204,7 +204,9 @@ knife bootstrap node01.chefbyexample.com -N node01
 
 
 
-## Install ##
+## Installing the Open Source Web Interface ##
+
+### Requirements installation ###
 Installation steps, just run:
 \begin{codelisting}
 \label{code:}
@@ -221,6 +223,7 @@ bundle install
 \end{codelisting}
 
 
+### COnfigure the default paramenters ###
 Configure the web app in /var/www/chef-server-webui/config/application.rb
 
 \begin{codelisting}
@@ -241,7 +244,7 @@ config.default_organization = "organizations/chefbyexample/"
 
 
 
-## Use ##
+### Use the interface on demand or install it as a service ###
 Once the Web UI is installed, from /var/www/chef-server-webui run:
 
 To test in the default port 9292:
@@ -253,7 +256,6 @@ rackup config.ru
 ```
 \end{codelisting}
 
-
 To run as a daemon in another port to test:
 \begin{codelisting}
 \label{code:}
@@ -263,21 +265,23 @@ rackup config.ru -D -p 1234
 ```
 \end{codelisting}
 
-
-
-
 Once you have tested it, to create the init scripts and install the run levels---
 \begin{codelisting}
 \label{code:}
 \codecaption{}
 ```bash
-chmod +x /var/www/chef-server-webui/init/chef-server-webui.sh
+#TO remove the script from the default run-levels
+#sudo update-rc.d -f chef-server-webui remove
+sudo chmod 755 /var/www/chef-server-webui/init/chef-server-webui.sh
 ln -s /var/www/chef-server-webui/init/chef-server-webui.sh /etc/init.d/chef-server-webui
-sudo chmod +x /etc/init.d/chef-server-webui
+sudo chmod 755 /etc/init.d/chef-server-webui
 sudo chown root:root /etc/init.d/chef-server-webui
 sudo update-rc.d chef-server-webui defaults
 ```
 \end{codelisting}
+
+
+
 
 
 
