@@ -211,13 +211,24 @@ bundle install
 </div>
 
 <div class="code"><div class="highlight"><pre>rackup config.ru
-</pre></div></div></div><p>To run as a daemon in another port:</p>
+</pre></div></div></div><p>To run as a daemon in another port to test:</p>
 <div class="codelisting" id="code-" data-tralics-id="uid31" data-number="2.15"><div class="heading"><span class="number">Listing 2.15</span> 
 
 <span class="description"></span>
 </div>
 
 <div class="code"><div class="highlight"><pre>rackup config.ru -D -p 1234
+</pre></div></div></div><p>Once you have tested it, to create the init scripts and install the run levels—</p>
+<div class="codelisting" id="code-" data-tralics-id="uid32" data-number="2.16"><div class="heading"><span class="number">Listing 2.16</span> 
+
+<span class="description"></span>
+</div>
+
+<div class="code"><div class="highlight"><pre>chmod +x /var/www/chef-server-webui/init/chef-server-webui.sh
+ln -s /var/www/chef-server-webui/init/chef-server-webui.sh /etc/init.d/chef-server-webui
+sudo chmod +x /etc/init.d/chef-server-webui
+sudo chown root:root /etc/init.d/chef-server-webui
+sudo update-rc.d chef-server-webui defaults
 </pre></div></div></div></div>
     </div>
   </body>

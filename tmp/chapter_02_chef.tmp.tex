@@ -216,11 +216,24 @@ rackup config.ru
 \end{Verbatim}
 \end{codelisting}
 
-To run as a daemon in another port:
+To run as a daemon in another port to test:
 \begin{codelisting}
 \label{code:}
 \codecaption{}
 \begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
 rackup config.ru \PYZhy{}D \PYZhy{}p 1234
+\end{Verbatim}
+\end{codelisting}
+
+Once you have tested it, to create the init scripts and install the run levels---
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+\begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
+chmod +x /var/www/chef\PYZhy{}server\PYZhy{}webui/init/chef\PYZhy{}server\PYZhy{}webui.sh
+ln \PYZhy{}s /var/www/chef\PYZhy{}server\PYZhy{}webui/init/chef\PYZhy{}server\PYZhy{}webui.sh /etc/init.d/chef\PYZhy{}server\PYZhy{}webui
+sudo chmod +x /etc/init.d/chef\PYZhy{}server\PYZhy{}webui
+sudo chown root:root /etc/init.d/chef\PYZhy{}server\PYZhy{}webui
+sudo update\PYZhy{}rc.d chef\PYZhy{}server\PYZhy{}webui defaults
 \end{Verbatim}
 \end{codelisting}

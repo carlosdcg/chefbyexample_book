@@ -254,7 +254,7 @@ rackup config.ru
 \end{codelisting}
 
 
-To run as a daemon in another port:
+To run as a daemon in another port to test:
 \begin{codelisting}
 \label{code:}
 \codecaption{}
@@ -262,3 +262,22 @@ To run as a daemon in another port:
 rackup config.ru -D -p 1234
 ```
 \end{codelisting}
+
+
+
+
+Once you have tested it, to create the init scripts and install the run levels---
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+```bash
+chmod +x /var/www/chef-server-webui/init/chef-server-webui.sh
+ln -s /var/www/chef-server-webui/init/chef-server-webui.sh /etc/init.d/chef-server-webui
+sudo chmod +x /etc/init.d/chef-server-webui
+sudo chown root:root /etc/init.d/chef-server-webui
+sudo update-rc.d chef-server-webui defaults
+```
+\end{codelisting}
+
+
+
