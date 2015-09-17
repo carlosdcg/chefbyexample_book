@@ -142,29 +142,103 @@ Chef Server installed..
 
 \section{Install one Workstation}
 
-\chapter{GEt CHef DK}
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+%= lang:bash
+\begin{code}
 
-sudo wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86\_64/chefdk\_0.7.0-1\_amd64.deb
+sudo wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.7.0-1_amd64.deb
 
-sudo dpkg -i chefdk\_*.deb
+sudo dpkg -i chefdk_*.deb
 
 sudo chef generate repo chef-repo
 
-mkdir \ensuremath{\sim}/chef-repo/.chef
-scp root@chef01.chefbyexample.com:/root/admin.pem \ensuremath{\sim}/chef-repo/.chef
-scp root@chef01.chefbyexample.com:/root/chefbyexample-validator.pem \ensuremath{\sim}/chef-repo/.chef
+mkdir ~/chef-repo/.chef
+scp root@chef01.chefbyexample.com:/root/admin.pem ~/chef-repo/.chef
+scp root@chef01.chefbyexample.com:/root/chefbyexample-validator.pem ~/chef-repo/.chef
 
-nano \ensuremath{\sim}/chef-repo/.chef/knife.rb
+nano ~/chef-repo/.chef/knife.rb
 
-current\_dir = File.dirname(\textbf{FILE})
-log\_level                :info
-log\_location             STDOUT
-node\_name                ``admin''
-client\_key               ``\#\{current\_dir\}/admin.pem''
-validation\_client\_name   ``chefbyexample-validator''
-validation\_key           ``\#\{current\_dir\}/chefbyexample-validator.pem''
-chef\_server\_url          ``https://chef01.chefbyexample.com/organizations/chefbyexample''
-syntax\_check\_cache\_path  ``\#\{ENV[`HOME']\}/.chef/syntaxcache''
-cookbook\_path            [''\#\{current\_dir\}/../cookbooks'']
+
+current_dir = File.dirname(__FILE__)
+log_level                :info
+log_location             STDOUT
+node_name                "admin"
+client_key               "#{current_dir}/admin.pem"
+validation_client_name   "chefbyexample-validator"
+validation_key           "#{current_dir}/chefbyexample-validator.pem"
+chef_server_url          "https://chef01.chefbyexample.com/organizations/chefbyexample"
+syntax_check_cache_path  "#{ENV['HOME']}/.chef/syntaxcache"
+cookbook_path            ["#{current_dir}/../cookbooks"]
+
 
 knife ssl fetch
+
+Bootstraping the first node
+
+knife bootstrap node01.chefbyexample.com -N node01
+
+
+\end{code}
+\end{codelisting}
+
+\section{Install}
+
+Installation steps, just run:
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+%= lang:bash
+\begin{code}
+aptitude install git rubygems1.9.1 ruby1.9.1-dev build-essential
+mkdir -p /var/www/
+cd /var/www/
+git clone https://github.com/carlosdcg/chef-server-webui
+cd chef-server-webui
+gem install bundler
+bundle install
+\end{code}
+\end{codelisting}
+
+Configure the web app in /var/www/chef-server-webui/config/application.rb
+
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+%= lang:ruby
+\begin{code}
+config.chef_server_url = "http://127.0.0.1"
+config.rest_client_name = "pivotal"
+config.rest_client_key = "/etc/opscode/pivotal.pem"
+config.admin_user_name =  "admin"
+config.admin_default_password = "4dm1n1str4t0r"
+config.rest_client_custom_http_headers = {}
+#This app only supports one organization, like the Open Source Chef Server 11
+config.default_organization = "organizations/chefbyexample/"
+\end{code}
+\end{codelisting}
+
+\section{Use}
+
+Once the Web UI is installed, from /var/www/chef-server-webui run:
+
+To test in the default port 9292:
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+%= lang:bash
+\begin{code}
+rackup config.ru
+\end{code}
+\end{codelisting}
+
+To run as a daemon in another port:
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+%= lang:bash
+\begin{code}
+rackup config.ru -D -p 1234
+\end{code}
+\end{codelisting}

@@ -158,7 +158,11 @@ Chef Server installed..
 ##Install one Workstation
 
 
-# GEt CHef DK
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+```bash
+
 sudo wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.7.0-1_amd64.deb
 
 sudo dpkg -i chefdk_*.deb
@@ -191,4 +195,70 @@ Bootstraping the first node
 knife bootstrap node01.chefbyexample.com -N node01
 
 
-DOne!!!!
+```
+\end{codelisting}
+
+
+
+
+
+
+
+## Install ##
+Installation steps, just run:
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+```bash
+aptitude install git rubygems1.9.1 ruby1.9.1-dev build-essential
+mkdir -p /var/www/
+cd /var/www/
+git clone https://github.com/carlosdcg/chef-server-webui
+cd chef-server-webui
+gem install bundler
+bundle install
+```
+\end{codelisting}
+
+
+Configure the web app in /var/www/chef-server-webui/config/application.rb
+
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+```ruby
+config.chef_server_url = "http://127.0.0.1"
+config.rest_client_name = "pivotal"
+config.rest_client_key = "/etc/opscode/pivotal.pem"
+config.admin_user_name =  "admin"
+config.admin_default_password = "4dm1n1str4t0r"
+config.rest_client_custom_http_headers = {}
+#This app only supports one organization, like the Open Source Chef Server 11
+config.default_organization = "organizations/chefbyexample/"
+```
+\end{codelisting}
+
+
+
+
+## Use ##
+Once the Web UI is installed, from /var/www/chef-server-webui run:
+
+To test in the default port 9292:
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+```bash
+rackup config.ru
+```
+\end{codelisting}
+
+
+To run as a daemon in another port:
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+```bash
+rackup config.ru -D -p 1234
+```
+\end{codelisting}

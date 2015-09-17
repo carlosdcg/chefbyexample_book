@@ -131,3 +131,96 @@ root@chef01:\PYZti{}\PYZsh{} sudo chef\PYZhy{}server\PYZhy{}ctl org\PYZhy{}creat
 Chef Server installed..
 
 \section{Install one Workstation}
+
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+\begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
+sudo wget https://opscode\PYZhy{}omnibus\PYZhy{}packages.s3.amazonaws.com/ubuntu/12.04/x86\PYZus{}64/chefdk\PYZus{}0.7.0\PYZhy{}1\PYZus{}amd64.deb
+
+sudo dpkg \PYZhy{}i chefdk\PYZus{}*.deb
+
+sudo chef generate repo chef\PYZhy{}repo
+
+mkdir \PYZti{}/chef\PYZhy{}repo/.chef
+scp root@chef01.chefbyexample.com:/root/admin.pem \PYZti{}/chef\PYZhy{}repo/.chef
+scp root@chef01.chefbyexample.com:/root/chefbyexample\PYZhy{}validator.pem \PYZti{}/chef\PYZhy{}repo/.chef
+
+nano \PYZti{}/chef\PYZhy{}repo/.chef/knife.rb
+
+
+\PY{n+nv}{current\PYZus{}dir} \PY{o}{=} File.dirname\PY{o}{(}\PYZus{}\PYZus{}FILE\PYZus{}\PYZus{}\PY{o}{)}
+log\PYZus{}level                :info
+log\PYZus{}location             STDOUT
+node\PYZus{}name                \PY{l+s+s2}{\PYZdq{}admin\PYZdq{}}
+client\PYZus{}key               \PY{l+s+s2}{\PYZdq{}\PYZsh{}\PYZob{}current\PYZus{}dir\PYZcb{}/admin.pem\PYZdq{}}
+validation\PYZus{}client\PYZus{}name   \PY{l+s+s2}{\PYZdq{}chefbyexample\PYZhy{}validator\PYZdq{}}
+validation\PYZus{}key           \PY{l+s+s2}{\PYZdq{}\PYZsh{}\PYZob{}current\PYZus{}dir\PYZcb{}/chefbyexample\PYZhy{}validator.pem\PYZdq{}}
+chef\PYZus{}server\PYZus{}url          \PY{l+s+s2}{\PYZdq{}https://chef01.chefbyexample.com/organizations/chefbyexample\PYZdq{}}
+syntax\PYZus{}check\PYZus{}cache\PYZus{}path  \PY{l+s+s2}{\PYZdq{}\PYZsh{}\PYZob{}ENV[\PYZsq{}HOME\PYZsq{}]\PYZcb{}/.chef/syntaxcache\PYZdq{}}
+cookbook\PYZus{}path            \PY{o}{[}\PY{l+s+s2}{\PYZdq{}\PYZsh{}\PYZob{}current\PYZus{}dir\PYZcb{}/../cookbooks\PYZdq{}}\PY{o}{]}
+
+
+knife ssl fetch
+
+Bootstraping the first node
+
+knife bootstrap node01.chefbyexample.com \PYZhy{}N node01
+\end{Verbatim}
+\end{codelisting}
+
+\section{Install}
+
+Installation steps, just run:
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+\begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
+aptitude install git rubygems1.9.1 ruby1.9.1\PYZhy{}dev build\PYZhy{}essential
+mkdir \PYZhy{}p /var/www/
+\PY{n+nb}{cd} /var/www/
+git clone https://github.com/carlosdcg/chef\PYZhy{}server\PYZhy{}webui
+\PY{n+nb}{cd }chef\PYZhy{}server\PYZhy{}webui
+gem install bundler
+bundle install
+\end{Verbatim}
+\end{codelisting}
+
+Configure the web app in /var/www/chef-server-webui/config/application.rb
+
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+\begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
+\PY{n}{config}\PY{o}{.}\PY{n}{chef\PYZus{}server\PYZus{}url} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{http://127.0.0.1}\PY{l+s+s2}{\PYZdq{}}
+\PY{n}{config}\PY{o}{.}\PY{n}{rest\PYZus{}client\PYZus{}name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pivotal}\PY{l+s+s2}{\PYZdq{}}
+\PY{n}{config}\PY{o}{.}\PY{n}{rest\PYZus{}client\PYZus{}key} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/etc/opscode/pivotal.pem}\PY{l+s+s2}{\PYZdq{}}
+\PY{n}{config}\PY{o}{.}\PY{n}{admin\PYZus{}user\PYZus{}name} \PY{o}{=}  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{admin}\PY{l+s+s2}{\PYZdq{}}
+\PY{n}{config}\PY{o}{.}\PY{n}{admin\PYZus{}default\PYZus{}password} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{4dm1n1str4t0r}\PY{l+s+s2}{\PYZdq{}}
+\PY{n}{config}\PY{o}{.}\PY{n}{rest\PYZus{}client\PYZus{}custom\PYZus{}http\PYZus{}headers} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+\PY{c+c1}{\PYZsh{}This app only supports one organization, like the Open Source Chef Server 11}
+\PY{n}{config}\PY{o}{.}\PY{n}{default\PYZus{}organization} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{organizations/chefbyexample/}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+\end{codelisting}
+
+\section{Use}
+
+Once the Web UI is installed, from /var/www/chef-server-webui run:
+
+To test in the default port 9292:
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+\begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
+rackup config.ru
+\end{Verbatim}
+\end{codelisting}
+
+To run as a daemon in another port:
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+\begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
+rackup config.ru \PYZhy{}D \PYZhy{}p 1234
+\end{Verbatim}
+\end{codelisting}
