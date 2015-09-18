@@ -140,7 +140,7 @@ root@chef01:~# sudo chef-server-ctl org-create chefbyexample "ChefByExample.com"
 
 Chef Server installed..
 
-\section{Install one Workstation}
+\section{Install the Workstation}
 
 \begin{codelisting}
 \label{code:}
@@ -183,7 +183,9 @@ knife bootstrap node01.chefbyexample.com -N node01
 \end{code}
 \end{codelisting}
 
-\section{Install}
+\section{Installing the Open Source Web Interface}
+
+\subsection{Requirements installation}
 
 Installation steps, just run:
 \begin{codelisting}
@@ -200,6 +202,8 @@ gem install bundler
 bundle install
 \end{code}
 \end{codelisting}
+
+\subsection{COnfigure the default paramenters}
 
 Configure the web app in /var/www/chef-server-webui/config/application.rb
 
@@ -219,7 +223,7 @@ config.default_organization = "organizations/chefbyexample/"
 \end{code}
 \end{codelisting}
 
-\section{Use}
+\subsection{Use the interface on demand or install it as a service}
 
 Once the Web UI is installed, from /var/www/chef-server-webui run:
 
@@ -249,9 +253,11 @@ Once you have tested it, to create the init scripts and install the run levels--
 \codecaption{}
 %= lang:bash
 \begin{code}
-chmod +x /var/www/chef-server-webui/init/chef-server-webui.sh
+#TO remove the script from the default run-levels
+#sudo update-rc.d -f chef-server-webui remove
+sudo chmod 755 /var/www/chef-server-webui/init/chef-server-webui.sh
 ln -s /var/www/chef-server-webui/init/chef-server-webui.sh /etc/init.d/chef-server-webui
-sudo chmod +x /etc/init.d/chef-server-webui
+sudo chmod 755 /etc/init.d/chef-server-webui
 sudo chown root:root /etc/init.d/chef-server-webui
 sudo update-rc.d chef-server-webui defaults
 \end{code}

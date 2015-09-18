@@ -130,7 +130,7 @@ root@chef01:\PYZti{}\PYZsh{} sudo chef\PYZhy{}server\PYZhy{}ctl org\PYZhy{}creat
 
 Chef Server installed..
 
-\section{Install one Workstation}
+\section{Install the Workstation}
 
 \begin{codelisting}
 \label{code:}
@@ -169,7 +169,9 @@ knife bootstrap node01.chefbyexample.com \PYZhy{}N node01
 \end{Verbatim}
 \end{codelisting}
 
-\section{Install}
+\section{Installing the Open Source Web Interface}
+
+\subsection{Requirements installation}
 
 Installation steps, just run:
 \begin{codelisting}
@@ -185,6 +187,8 @@ gem install bundler
 bundle install
 \end{Verbatim}
 \end{codelisting}
+
+\subsection{COnfigure the default paramenters}
 
 Configure the web app in /var/www/chef-server-webui/config/application.rb
 
@@ -203,7 +207,7 @@ Configure the web app in /var/www/chef-server-webui/config/application.rb
 \end{Verbatim}
 \end{codelisting}
 
-\section{Use}
+\subsection{Use the interface on demand or install it as a service}
 
 Once the Web UI is installed, from /var/www/chef-server-webui run:
 
@@ -230,9 +234,11 @@ Once you have tested it, to create the init scripts and install the run levels--
 \label{code:}
 \codecaption{}
 \begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
-chmod +x /var/www/chef\PYZhy{}server\PYZhy{}webui/init/chef\PYZhy{}server\PYZhy{}webui.sh
+\PY{c}{\PYZsh{}TO remove the script from the default run\PYZhy{}levels}
+\PY{c}{\PYZsh{}sudo update\PYZhy{}rc.d \PYZhy{}f chef\PYZhy{}server\PYZhy{}webui remove}
+sudo chmod \PY{l+m}{755} /var/www/chef\PYZhy{}server\PYZhy{}webui/init/chef\PYZhy{}server\PYZhy{}webui.sh
 ln \PYZhy{}s /var/www/chef\PYZhy{}server\PYZhy{}webui/init/chef\PYZhy{}server\PYZhy{}webui.sh /etc/init.d/chef\PYZhy{}server\PYZhy{}webui
-sudo chmod +x /etc/init.d/chef\PYZhy{}server\PYZhy{}webui
+sudo chmod \PY{l+m}{755} /etc/init.d/chef\PYZhy{}server\PYZhy{}webui
 sudo chown root:root /etc/init.d/chef\PYZhy{}server\PYZhy{}webui
 sudo update\PYZhy{}rc.d chef\PYZhy{}server\PYZhy{}webui defaults
 \end{Verbatim}

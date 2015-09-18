@@ -136,7 +136,7 @@
 </pre></div></div></div><div class="graphics image"><img src="images/figures/12_install_chef_finished.PNG" alt="images/figures/12_install_chef_finished" /></div>
 <p>Chef Server installed..</p>
 </div>
-<div id="cid24" data-tralics-id="cid24" class="section" data-number="2.11"><h2><a href="chapter_02_chef.html#cid24" class="heading hyperref"><span class="number">2.11 </span>Install one Workstation</a></h2>
+<div id="cid24" data-tralics-id="cid24" class="section" data-number="2.11"><h2><a href="chapter_02_chef.html#cid24" class="heading hyperref"><span class="number">2.11 </span>Install the Workstation</a></h2>
 <div class="codelisting" id="code-" data-tralics-id="uid27" data-number="2.11"><div class="heading"><span class="number">Listing 2.11</span> 
 
 <span class="description"></span>
@@ -173,9 +173,10 @@ Bootstraping the first node
 
 knife bootstrap node01.chefbyexample.com -N node01
 </pre></div></div></div></div>
-<div id="cid25" data-tralics-id="cid25" class="section" data-number="2.12"><h2><a href="chapter_02_chef.html#cid25" class="heading hyperref"><span class="number">2.12 </span>Install</a></h2>
+<div id="cid25" data-tralics-id="cid25" class="section" data-number="2.12"><h2><a href="chapter_02_chef.html#cid25" class="heading hyperref"><span class="number">2.12 </span>Installing the Open Source Web Interface</a></h2>
+<div id="uid28" data-tralics-id="uid28" class="subsection" data-number="2.12.1"><h3><a href="chapter_02_chef.html#uid28" class="heading hyperref"><span class="number">2.12.1 </span>Requirements installation</a></h3>
 <p>Installation steps, just run:</p>
-<div class="codelisting" id="code-" data-tralics-id="uid28" data-number="2.12"><div class="heading"><span class="number">Listing 2.12</span> 
+<div class="codelisting" id="code-" data-tralics-id="uid29" data-number="2.12"><div class="heading"><span class="number">Listing 2.12</span> 
 
 <span class="description"></span>
 </div>
@@ -187,8 +188,10 @@ git clone https://github.com/carlosdcg/chef-server-webui
 <span class="nb">cd </span>chef-server-webui
 gem install bundler
 bundle install
-</pre></div></div></div><p>Configure the web app in /var/www/chef-server-webui/config/application.rb</p>
-<div class="codelisting" id="code-" data-tralics-id="uid29" data-number="2.13"><div class="heading"><span class="number">Listing 2.13</span> 
+</pre></div></div></div></div>
+<div id="uid30" data-tralics-id="uid30" class="subsection" data-number="2.12.2"><h3><a href="chapter_02_chef.html#uid30" class="heading hyperref"><span class="number">2.12.2 </span>COnfigure the default paramenters</a></h3>
+<p>Configure the web app in /var/www/chef-server-webui/config/application.rb</p>
+<div class="codelisting" id="code-" data-tralics-id="uid31" data-number="2.13"><div class="heading"><span class="number">Listing 2.13</span> 
 
 <span class="description"></span>
 </div>
@@ -202,34 +205,36 @@ bundle install
 <span class="c1">#This app only supports one organization, like the Open Source Chef Server 11</span>
 <span class="n">config</span><span class="o">.</span><span class="n">default_organization</span> <span class="o">=</span> <span class="s2">"organizations/chefbyexample/"</span>
 </pre></div></div></div></div>
-<div id="cid26" data-tralics-id="cid26" class="section" data-number="2.13"><h2><a href="chapter_02_chef.html#cid26" class="heading hyperref"><span class="number">2.13 </span>Use</a></h2>
+<div id="uid32" data-tralics-id="uid32" class="subsection" data-number="2.12.3"><h3><a href="chapter_02_chef.html#uid32" class="heading hyperref"><span class="number">2.12.3 </span>Use the interface on demand or install it as a service</a></h3>
 <p>Once the Web UI is installed, from /var/www/chef-server-webui run:</p>
 <p>To test in the default port 9292:</p>
-<div class="codelisting" id="code-" data-tralics-id="uid30" data-number="2.14"><div class="heading"><span class="number">Listing 2.14</span> 
+<div class="codelisting" id="code-" data-tralics-id="uid33" data-number="2.14"><div class="heading"><span class="number">Listing 2.14</span> 
 
 <span class="description"></span>
 </div>
 
 <div class="code"><div class="highlight"><pre>rackup config.ru
 </pre></div></div></div><p>To run as a daemon in another port to test:</p>
-<div class="codelisting" id="code-" data-tralics-id="uid31" data-number="2.15"><div class="heading"><span class="number">Listing 2.15</span> 
+<div class="codelisting" id="code-" data-tralics-id="uid34" data-number="2.15"><div class="heading"><span class="number">Listing 2.15</span> 
 
 <span class="description"></span>
 </div>
 
 <div class="code"><div class="highlight"><pre>rackup config.ru -D -p 1234
 </pre></div></div></div><p>Once you have tested it, to create the init scripts and install the run levels—</p>
-<div class="codelisting" id="code-" data-tralics-id="uid32" data-number="2.16"><div class="heading"><span class="number">Listing 2.16</span> 
+<div class="codelisting" id="code-" data-tralics-id="uid35" data-number="2.16"><div class="heading"><span class="number">Listing 2.16</span> 
 
 <span class="description"></span>
 </div>
 
-<div class="code"><div class="highlight"><pre>chmod +x /var/www/chef-server-webui/init/chef-server-webui.sh
+<div class="code"><div class="highlight"><pre><span class="c">#TO remove the script from the default run-levels</span>
+<span class="c">#sudo update-rc.d -f chef-server-webui remove</span>
+sudo chmod <span class="m">755</span> /var/www/chef-server-webui/init/chef-server-webui.sh
 ln -s /var/www/chef-server-webui/init/chef-server-webui.sh /etc/init.d/chef-server-webui
-sudo chmod +x /etc/init.d/chef-server-webui
+sudo chmod <span class="m">755</span> /etc/init.d/chef-server-webui
 sudo chown root:root /etc/init.d/chef-server-webui
 sudo update-rc.d chef-server-webui defaults
-</pre></div></div></div></div>
+</pre></div></div></div></div></div>
     </div>
   </body>
 </html>
