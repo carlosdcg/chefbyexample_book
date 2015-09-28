@@ -30,7 +30,7 @@
 ##Install CHEF
 
 
-![01](images/figures/01_host_name.png)
+The first step is to check the server host name.
 
 \begin{codelisting}
 \label{code:hostname}
@@ -41,8 +41,7 @@ root@chef01:~# hostname -f
 \end{codelisting}
 
 
-![02](images/figures/02_host_name.png)
-
+Now we need to edit the host name configuration file in order to add the FQDN of the server.
 \begin{codelisting}
 \label{code:}
 \codecaption{}
@@ -51,8 +50,24 @@ root@chef01:~# sudo nano /etc/hosts
 ```
 \end{codelisting}
 
+Your configuration file should be something similar to this one.
 
-![03](images/figures/03_install_chef.PNG)
+![02](images/figures/02_host_name.png)
+
+
+
+Update the packages list and update the server.
+
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+```bash
+root@chef01:~# sudo aptitude update
+root@chef01:~# sudo aptitude upgrade
+```
+\end{codelisting}
+
+Download the latest version of the chef server to the root folder of the current user.
 
 \begin{codelisting}
 \label{code:}
@@ -63,68 +78,45 @@ root@chef01:~# wget https://web-dl.packagecloud.io/chef/stable/packages/ubuntu/t
 \end{codelisting}
 
 
-![04](images/figures/04_install_chef.PNG)
+Install the Chef Server.
 
 \begin{codelisting}
 \label{code:}
 \codecaption{}
 ```bash
 root@chef01:~# sudo dpkg -i chef-server-core_*.deb
-```
-\end{codelisting}
-
-
-![05](images/figures/05_install_chef_config.PNG)
-
-\begin{codelisting}
-\label{code:}
-\codecaption{}
-```bash
 root@chef01:~# sudo chef-server-ctl reconfigure
 ```
 \end{codelisting}
 
-
 ![06](images/figures/06_install_chef_api.PNG)
 
-Web interface
+This should be the result....
 
 
-![07](images/figures/07_install_chef_web_ui.PNG)
 
-(Premium freature up to 25 nodes..)
+Install additional modules.
+
+
+
+(Premium freatures up to 25 nodes..)
 \begin{codelisting}
 \label{code:}
 \codecaption{}
 ```bash
-root@chef01:~# chef-server-ctl install opscode-manage; chef-server-ctl reconfigure; opscode-manage-ctl reconfigure
+root@chef01:~# chef-server-ctl install opscode-manage;
+root@chef01:~# chef-server-ctl install opscode-push-jobs-server;
+root@chef01:~# chef-server-ctl install opscode-reporting;
+root@chef01:~# opscode-manage-ctl reconfigure;
+root@chef01:~# opscode-push-jobs-server-ctl reconfigure;
+root@chef01:~# opscode-reporting-ctl reconfigure; 
+root@chef01:~# chef-server-ctl reconfigure;
+
 ```
 \end{codelisting}
 
 
-![08](images/figures/08_install_chef_push_jobs.PNG)
-
-\begin{codelisting}
-\label{code:}
-\codecaption{}
-```bash
-root@chef01:~# chef-server-ctl install opscode-push-jobs-server; chef-server-ctl reconfigure; opscode-push-jobs-server-ctl reconfigure;
-```
-\end{codelisting}
-
-
-![09](images/figures/09_install_chef_reporting.PNG)
-
-(Premium freature up to 25 nodes..)
-\begin{codelisting}
-\label{code:}
-\codecaption{}
-```bash
-root@chef01:~# chef-server-ctl install opscode-reporting; chef-server-ctl reconfigure; opscode-reporting-ctl reconfigure; 
-```
-\end{codelisting}
-
-![10](images/figures/10_install_chef_add_user.PNG)
+We need to create the first user (Admin user)
 
 \begin{codelisting}
 \label{code:}
@@ -135,7 +127,13 @@ root@chef01:~# chef-server-ctl user-create admin the administrator the_good@chef
 \end{codelisting}
 
 
-![11](images/figures/11_install_chef_add_org.PNG)
+WE need to create the first organization and add the first created user to it.
+
+REmember to change:
+
+ * Your organization name name.
+ * The display name for the organization.
+ * The name of the validator key.
 
 \begin{codelisting}
 \label{code:}
@@ -148,7 +146,7 @@ root@chef01:~# sudo chef-server-ctl org-create chefbyexample "ChefByExample.com"
 
 ![12](images/figures/12_install_chef_finished.PNG)
 
-Chef Server installed..
+Now the Chef SErver is fully operative, now we need to add the Workstation.
 
 
 
@@ -212,19 +210,16 @@ Installation steps, just run:
 \label{code:}
 \codecaption{}
 ```bash
-aptitude install git rubygems1.9.1 ruby1.9.1-dev build-essential
-mkdir -p /var/www/
-cd /var/www/
-git clone https://github.com/carlosdcg/chef-server-webui
-cd chef-server-webui
-gem install bundler
-bundle install
+aptitude install git rubygems1.9.1 ruby1.9.1-dev build-essential;
+mkdir -p /var/www/; cd /var/www/; git clone https://github.com/carlosdcg/chefbyexample_webui; cd chefbyexample_webui;
+gem install bundler;
+bundle install;
 ```
 \end{codelisting}
 
 
-### COnfigure the default paramenters ###
-Configure the web app in /var/www/chef-server-webui/config/application.rb
+### Configure the default paramenters ###
+Configure the web app in /var/www/chefbyexample_webui/config/application.rb
 
 \begin{codelisting}
 \label{code:}
@@ -241,11 +236,8 @@ config.default_organization = "organizations/chefbyexample/"
 ```
 \end{codelisting}
 
-
-
-
 ### Use the interface on demand or install it as a service ###
-Once the Web UI is installed, from /var/www/chef-server-webui run:
+Once the Web UI is installed, from /var/www/chefbyexample_webui run:
 
 To test in the default port 9292:
 \begin{codelisting}
@@ -271,12 +263,12 @@ Once you have tested it, to create the init scripts and install the run levels--
 \codecaption{}
 ```bash
 #TO remove the script from the default run-levels
-#sudo update-rc.d -f chef-server-webui remove
-sudo chmod 755 /var/www/chef-server-webui/init/chef-server-webui.sh
-ln -s /var/www/chef-server-webui/init/chef-server-webui.sh /etc/init.d/chef-server-webui
-sudo chmod 755 /etc/init.d/chef-server-webui
-sudo chown root:root /etc/init.d/chef-server-webui
-sudo update-rc.d chef-server-webui defaults
+#sudo update-rc.d -f chefbyexample_webui remove
+sudo chmod 755 /var/www/chefbyexample_webui/init/chefbyexample_webui.sh
+ln -s /var/www/chefbyexample_webui/init/chefbyexample_webui.sh /etc/init.d/chefbyexample_webui
+sudo chmod 755 /etc/init.d/chefbyexample_webui
+sudo chown root:root /etc/init.d/chefbyexample_webui
+sudo update-rc.d chefbyexample_webui defaults
 ```
 \end{codelisting}
 

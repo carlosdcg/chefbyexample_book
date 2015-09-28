@@ -20,7 +20,7 @@
 
 \section{Install CHEF}
 
-\image{images/figures/01_host_name.png}
+The first step is to check the server host name.
 
 \begin{codelisting}
 \label{code:hostname}
@@ -30,8 +30,7 @@ root@chef01:\PYZti{}\PYZsh{} hostname \PYZhy{}f
 \end{Verbatim}
 \end{codelisting}
 
-\image{images/figures/02_host_name.png}
-
+Now we need to edit the host name configuration file in order to add the FQDN of the server.
 \begin{codelisting}
 \label{code:}
 \codecaption{}
@@ -40,7 +39,22 @@ root@chef01:\PYZti{}\PYZsh{} sudo nano /etc/hosts
 \end{Verbatim}
 \end{codelisting}
 
-\image{images/figures/03_install_chef.PNG}
+Your configuration file should be something similar to this one.
+
+\image{images/figures/02_host_name.png}
+
+Update the packages list and update the server.
+
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+\begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
+root@chef01:\PYZti{}\PYZsh{} sudo aptitude update
+root@chef01:\PYZti{}\PYZsh{} sudo aptitude upgrade
+\end{Verbatim}
+\end{codelisting}
+
+Download the latest version of the chef server to the root folder of the current user.
 
 \begin{codelisting}
 \label{code:}
@@ -50,29 +64,22 @@ root@chef01:\PYZti{}\PYZsh{} wget https://web\PYZhy{}dl.packagecloud.io/chef/sta
 \end{Verbatim}
 \end{codelisting}
 
-\image{images/figures/04_install_chef.PNG}
+Install the Chef Server.
 
 \begin{codelisting}
 \label{code:}
 \codecaption{}
 \begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
 root@chef01:\PYZti{}\PYZsh{} sudo dpkg \PYZhy{}i chef\PYZhy{}server\PYZhy{}core\PYZus{}*.deb
-\end{Verbatim}
-\end{codelisting}
-
-\image{images/figures/05_install_chef_config.PNG}
-
-\begin{codelisting}
-\label{code:}
-\codecaption{}
-\begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
 root@chef01:\PYZti{}\PYZsh{} sudo chef\PYZhy{}server\PYZhy{}ctl reconfigure
 \end{Verbatim}
 \end{codelisting}
 
 \image{images/figures/06_install_chef_api.PNG}
 
-Web interface
+This should be the result\ldots{}.
+
+Install additional modules.
 
 \image{images/figures/07_install_chef_web_ui.PNG}
 
@@ -81,32 +88,17 @@ Web interface
 \label{code:}
 \codecaption{}
 \begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
-root@chef01:\PYZti{}\PYZsh{} chef\PYZhy{}server\PYZhy{}ctl install opscode\PYZhy{}manage\PY{p}{;} chef\PYZhy{}server\PYZhy{}ctl reconfigure\PY{p}{;} opscode\PYZhy{}manage\PYZhy{}ctl reconfigure
+root@chef01:\PYZti{}\PYZsh{} chef\PYZhy{}server\PYZhy{}ctl install opscode\PYZhy{}manage\PY{p}{;}
+root@chef01:\PYZti{}\PYZsh{} chef\PYZhy{}server\PYZhy{}ctl install opscode\PYZhy{}push\PYZhy{}jobs\PYZhy{}server\PY{p}{;}
+root@chef01:\PYZti{}\PYZsh{} chef\PYZhy{}server\PYZhy{}ctl install opscode\PYZhy{}reporting\PY{p}{;}
+root@chef01:\PYZti{}\PYZsh{} opscode\PYZhy{}manage\PYZhy{}ctl reconfigure
+root@chef01:\PYZti{}\PYZsh{} opscode\PYZhy{}push\PYZhy{}jobs\PYZhy{}server\PYZhy{}ctl reconfigure\PY{p}{;}
+root@chef01:\PYZti{}\PYZsh{} opscode\PYZhy{}reporting\PYZhy{}ctl reconfigure\PY{p}{;} 
+root@chef01:\PYZti{}\PYZsh{} chef\PYZhy{}server\PYZhy{}ctl reconfigure\PY{p}{;}
 \end{Verbatim}
 \end{codelisting}
 
-\image{images/figures/08_install_chef_push_jobs.PNG}
-
-\begin{codelisting}
-\label{code:}
-\codecaption{}
-\begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
-root@chef01:\PYZti{}\PYZsh{} chef\PYZhy{}server\PYZhy{}ctl install opscode\PYZhy{}push\PYZhy{}jobs\PYZhy{}server\PY{p}{;} chef\PYZhy{}server\PYZhy{}ctl reconfigure\PY{p}{;} opscode\PYZhy{}push\PYZhy{}jobs\PYZhy{}server\PYZhy{}ctl reconfigure\PY{p}{;}
-\end{Verbatim}
-\end{codelisting}
-
-\image{images/figures/09_install_chef_reporting.PNG}
-
-(Premium freature up to 25 nodes..)
-\begin{codelisting}
-\label{code:}
-\codecaption{}
-\begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
-root@chef01:\PYZti{}\PYZsh{} chef\PYZhy{}server\PYZhy{}ctl install opscode\PYZhy{}reporting\PY{p}{;} chef\PYZhy{}server\PYZhy{}ctl reconfigure\PY{p}{;} opscode\PYZhy{}reporting\PYZhy{}ctl reconfigure\PY{p}{;} 
-\end{Verbatim}
-\end{codelisting}
-
-\image{images/figures/10_install_chef_add_user.PNG}
+We need to create the first user (Admin user)
 
 \begin{codelisting}
 \label{code:}
@@ -116,7 +108,7 @@ root@chef01:\PYZti{}\PYZsh{} chef\PYZhy{}server\PYZhy{}ctl user\PYZhy{}create ad
 \end{Verbatim}
 \end{codelisting}
 
-\image{images/figures/11_install_chef_add_org.PNG}
+WE need to create the first organization and add the first created user to it.
 
 \begin{codelisting}
 \label{code:}
@@ -128,7 +120,7 @@ root@chef01:\PYZti{}\PYZsh{} sudo chef\PYZhy{}server\PYZhy{}ctl org\PYZhy{}creat
 
 \image{images/figures/12_install_chef_finished.PNG}
 
-Chef Server installed..
+Now the Chef SErver is fully operative, now we need to add the WOrkstation.
 
 \section{Install the Workstation}
 

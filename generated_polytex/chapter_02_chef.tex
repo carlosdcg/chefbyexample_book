@@ -20,7 +20,7 @@
 
 \section{Install CHEF}
 
-\image{images/figures/01_host_name.png}
+The first step is to check the server host name.
 
 \begin{codelisting}
 \label{code:hostname}
@@ -31,8 +31,7 @@ root@chef01:~# hostname -f
 \end{code}
 \end{codelisting}
 
-\image{images/figures/02_host_name.png}
-
+Now we need to edit the host name configuration file in order to add the FQDN of the server.
 \begin{codelisting}
 \label{code:}
 \codecaption{}
@@ -42,7 +41,23 @@ root@chef01:~# sudo nano /etc/hosts
 \end{code}
 \end{codelisting}
 
-\image{images/figures/03_install_chef.PNG}
+Your configuration file should be something similar to this one.
+
+\image{images/figures/02_host_name.png}
+
+Update the packages list and update the server.
+
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+%= lang:bash
+\begin{code}
+root@chef01:~# sudo aptitude update
+root@chef01:~# sudo aptitude upgrade
+\end{code}
+\end{codelisting}
+
+Download the latest version of the chef server to the root folder of the current user.
 
 \begin{codelisting}
 \label{code:}
@@ -53,7 +68,7 @@ root@chef01:~# wget https://web-dl.packagecloud.io/chef/stable/packages/ubuntu/t
 \end{code}
 \end{codelisting}
 
-\image{images/figures/04_install_chef.PNG}
+Install the Chef Server.
 
 \begin{codelisting}
 \label{code:}
@@ -61,23 +76,15 @@ root@chef01:~# wget https://web-dl.packagecloud.io/chef/stable/packages/ubuntu/t
 %= lang:bash
 \begin{code}
 root@chef01:~# sudo dpkg -i chef-server-core_*.deb
-\end{code}
-\end{codelisting}
-
-\image{images/figures/05_install_chef_config.PNG}
-
-\begin{codelisting}
-\label{code:}
-\codecaption{}
-%= lang:bash
-\begin{code}
 root@chef01:~# sudo chef-server-ctl reconfigure
 \end{code}
 \end{codelisting}
 
 \image{images/figures/06_install_chef_api.PNG}
 
-Web interface
+This should be the result\ldots{}.
+
+Install additional modules.
 
 \image{images/figures/07_install_chef_web_ui.PNG}
 
@@ -87,34 +94,18 @@ Web interface
 \codecaption{}
 %= lang:bash
 \begin{code}
-root@chef01:~# chef-server-ctl install opscode-manage; chef-server-ctl reconfigure; opscode-manage-ctl reconfigure
+root@chef01:~# chef-server-ctl install opscode-manage;
+root@chef01:~# chef-server-ctl install opscode-push-jobs-server;
+root@chef01:~# chef-server-ctl install opscode-reporting;
+root@chef01:~# opscode-manage-ctl reconfigure
+root@chef01:~# opscode-push-jobs-server-ctl reconfigure;
+root@chef01:~# opscode-reporting-ctl reconfigure; 
+root@chef01:~# chef-server-ctl reconfigure;
+
 \end{code}
 \end{codelisting}
 
-\image{images/figures/08_install_chef_push_jobs.PNG}
-
-\begin{codelisting}
-\label{code:}
-\codecaption{}
-%= lang:bash
-\begin{code}
-root@chef01:~# chef-server-ctl install opscode-push-jobs-server; chef-server-ctl reconfigure; opscode-push-jobs-server-ctl reconfigure;
-\end{code}
-\end{codelisting}
-
-\image{images/figures/09_install_chef_reporting.PNG}
-
-(Premium freature up to 25 nodes..)
-\begin{codelisting}
-\label{code:}
-\codecaption{}
-%= lang:bash
-\begin{code}
-root@chef01:~# chef-server-ctl install opscode-reporting; chef-server-ctl reconfigure; opscode-reporting-ctl reconfigure; 
-\end{code}
-\end{codelisting}
-
-\image{images/figures/10_install_chef_add_user.PNG}
+We need to create the first user (Admin user)
 
 \begin{codelisting}
 \label{code:}
@@ -125,7 +116,7 @@ root@chef01:~# chef-server-ctl user-create admin the administrator the_good@chef
 \end{code}
 \end{codelisting}
 
-\image{images/figures/11_install_chef_add_org.PNG}
+WE need to create the first organization and add the first created user to it.
 
 \begin{codelisting}
 \label{code:}
@@ -138,7 +129,7 @@ root@chef01:~# sudo chef-server-ctl org-create chefbyexample "ChefByExample.com"
 
 \image{images/figures/12_install_chef_finished.PNG}
 
-Chef Server installed..
+Now the Chef SErver is fully operative, now we need to add the WOrkstation.
 
 \section{Install the Workstation}
 
