@@ -81,9 +81,7 @@ This should be the result\ldots{}.
 
 Install additional modules.
 
-\image{images/figures/07_install_chef_web_ui.PNG}
-
-(Premium freature up to 25 nodes..)
+(Premium freatures up to 25 nodes..)
 \begin{codelisting}
 \label{code:}
 \codecaption{}
@@ -91,7 +89,7 @@ Install additional modules.
 root@chef01:\PYZti{}\PYZsh{} chef\PYZhy{}server\PYZhy{}ctl install opscode\PYZhy{}manage\PY{p}{;}
 root@chef01:\PYZti{}\PYZsh{} chef\PYZhy{}server\PYZhy{}ctl install opscode\PYZhy{}push\PYZhy{}jobs\PYZhy{}server\PY{p}{;}
 root@chef01:\PYZti{}\PYZsh{} chef\PYZhy{}server\PYZhy{}ctl install opscode\PYZhy{}reporting\PY{p}{;}
-root@chef01:\PYZti{}\PYZsh{} opscode\PYZhy{}manage\PYZhy{}ctl reconfigure
+root@chef01:\PYZti{}\PYZsh{} opscode\PYZhy{}manage\PYZhy{}ctl reconfigure\PY{p}{;}
 root@chef01:\PYZti{}\PYZsh{} opscode\PYZhy{}push\PYZhy{}jobs\PYZhy{}server\PYZhy{}ctl reconfigure\PY{p}{;}
 root@chef01:\PYZti{}\PYZsh{} opscode\PYZhy{}reporting\PYZhy{}ctl reconfigure\PY{p}{;} 
 root@chef01:\PYZti{}\PYZsh{} chef\PYZhy{}server\PYZhy{}ctl reconfigure\PY{p}{;}
@@ -110,6 +108,14 @@ root@chef01:\PYZti{}\PYZsh{} chef\PYZhy{}server\PYZhy{}ctl user\PYZhy{}create ad
 
 WE need to create the first organization and add the first created user to it.
 
+REmember to change:
+
+\begin{itemize}
+\item Your organization name name.
+\item The display name for the organization.
+\item The name of the validator key.
+\end{itemize}
+
 \begin{codelisting}
 \label{code:}
 \codecaption{}
@@ -120,7 +126,7 @@ root@chef01:\PYZti{}\PYZsh{} sudo chef\PYZhy{}server\PYZhy{}ctl org\PYZhy{}creat
 
 \image{images/figures/12_install_chef_finished.PNG}
 
-Now the Chef SErver is fully operative, now we need to add the WOrkstation.
+Now the Chef SErver is fully operative, now we need to add the Workstation.
 
 \section{Install the Workstation}
 
@@ -170,19 +176,16 @@ Installation steps, just run:
 \label{code:}
 \codecaption{}
 \begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
-aptitude install git rubygems1.9.1 ruby1.9.1\PYZhy{}dev build\PYZhy{}essential
-mkdir \PYZhy{}p /var/www/
-\PY{n+nb}{cd} /var/www/
-git clone https://github.com/carlosdcg/chef\PYZhy{}server\PYZhy{}webui
-\PY{n+nb}{cd }chef\PYZhy{}server\PYZhy{}webui
-gem install bundler
-bundle install
+aptitude install git rubygems1.9.1 ruby1.9.1\PYZhy{}dev build\PYZhy{}essential\PY{p}{;}
+mkdir \PYZhy{}p /var/www/\PY{p}{;} \PY{n+nb}{cd} /var/www/\PY{p}{;} git clone https://github.com/carlosdcg/chefbyexample\PYZus{}webui\PY{p}{;} \PY{n+nb}{cd }chefbyexample\PYZus{}webui\PY{p}{;}
+gem install bundler\PY{p}{;}
+bundle install\PY{p}{;}
 \end{Verbatim}
 \end{codelisting}
 
-\subsection{COnfigure the default paramenters}
+\subsection{Configure the default paramenters}
 
-Configure the web app in /var/www/chef-server-webui/config/application.rb
+Configure the web app in /var/www/chefbyexample\_webui/config/application.rb
 
 \begin{codelisting}
 \label{code:}
@@ -201,7 +204,7 @@ Configure the web app in /var/www/chef-server-webui/config/application.rb
 
 \subsection{Use the interface on demand or install it as a service}
 
-Once the Web UI is installed, from /var/www/chef-server-webui run:
+Once the Web UI is installed, from /var/www/chefbyexample\_webui run:
 
 To test in the default port 9292:
 \begin{codelisting}
@@ -227,11 +230,11 @@ Once you have tested it, to create the init scripts and install the run levels--
 \codecaption{}
 \begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
 \PY{c}{\PYZsh{}TO remove the script from the default run\PYZhy{}levels}
-\PY{c}{\PYZsh{}sudo update\PYZhy{}rc.d \PYZhy{}f chef\PYZhy{}server\PYZhy{}webui remove}
-sudo chmod \PY{l+m}{755} /var/www/chef\PYZhy{}server\PYZhy{}webui/init/chef\PYZhy{}server\PYZhy{}webui.sh
-ln \PYZhy{}s /var/www/chef\PYZhy{}server\PYZhy{}webui/init/chef\PYZhy{}server\PYZhy{}webui.sh /etc/init.d/chef\PYZhy{}server\PYZhy{}webui
-sudo chmod \PY{l+m}{755} /etc/init.d/chef\PYZhy{}server\PYZhy{}webui
-sudo chown root:root /etc/init.d/chef\PYZhy{}server\PYZhy{}webui
-sudo update\PYZhy{}rc.d chef\PYZhy{}server\PYZhy{}webui defaults
+\PY{c}{\PYZsh{}sudo update\PYZhy{}rc.d \PYZhy{}f chefbyexample\PYZus{}webui remove}
+sudo chmod \PY{l+m}{755} /var/www/chefbyexample\PYZus{}webui/init/chefbyexample\PYZus{}webui.sh
+ln \PYZhy{}s /var/www/chefbyexample\PYZus{}webui/init/chefbyexample\PYZus{}webui.sh /etc/init.d/chefbyexample\PYZus{}webui
+sudo chmod \PY{l+m}{755} /etc/init.d/chefbyexample\PYZus{}webui
+sudo chown root:root /etc/init.d/chefbyexample\PYZus{}webui
+sudo update\PYZhy{}rc.d chefbyexample\PYZus{}webui defaults
 \end{Verbatim}
 \end{codelisting}

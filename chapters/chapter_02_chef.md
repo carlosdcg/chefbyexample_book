@@ -204,6 +204,9 @@ knife bootstrap node01.chefbyexample.com -N node01
 
 ## Installing the Open Source Web Interface ##
 
+First, check the status of this project (Work in progress) as 
+Im adapting the web interface to support CHef Server 12
+
 ### Requirements installation ###
 Installation steps, just run:
 \begin{codelisting}

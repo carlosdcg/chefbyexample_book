@@ -8,7 +8,7 @@
       <dc:creator>Carlos Camacho</dc:creator>
       <dc:publisher>Softcover</dc:publisher>
       <dc:identifier id="BookID">urn:uuid:e4be0181-7160-4e93-8af0-1fae8b7a3caf</dc:identifier>
-      <meta property="dcterms:modified">2015-09-28T11:31:45Z</meta>
+      <meta property="dcterms:modified">2015-09-28T12:49:11Z</meta>
       <meta name="cover" content="img-cover-jpg"/>
   </metadata>
   <manifest>
@@ -24,7 +24,6 @@
       <item id="frontmatter" href="frontmatter_fragment.html" media-type="application/xhtml+xml"/>
 <item id="chapter_01_intro" href="chapter_01_intro_fragment.html" media-type="application/xhtml+xml"/>
       <item id="img-02_host_name-png" href="images/figures/02_host_name.png" media-type="image/png"/>
-<item id="img-07_install_chef_web_ui-PNG" href="images/figures/07_install_chef_web_ui.PNG" media-type="image/PNG"/>
 <item id="img-12_install_chef_finished-PNG" href="images/figures/12_install_chef_finished.PNG" media-type="image/PNG"/>
 <item id="img-06_install_chef_api-PNG" href="images/figures/06_install_chef_api.PNG" media-type="image/PNG"/>
 <item id="img-cover-jpg" href="images/cover.jpg" media-type="image/jpeg"/>
