@@ -219,7 +219,7 @@ root@workstation01:~# knife ssl fetch
 ##Bootstraping nodes
 
 
-Bootsrap one node to test if everithing is working fine.
+Bootsrap one node to test if everything is working fine.
 
 \begin{codelisting}
 \label{code:}
