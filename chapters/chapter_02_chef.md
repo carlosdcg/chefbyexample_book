@@ -146,7 +146,7 @@ root@chef01:~# sudo chef-server-ctl org-create chefbyexample "ChefByExample.com"
 
 ![12](images/figures/12_install_chef_finished.PNG)
 
-Now the Chef SErver is fully operative, now we need to add the Workstation.
+Now the Chef Server is fully operative, now we need to add the Workstation.
 
 
 
@@ -155,7 +155,7 @@ Now the Chef SErver is fully operative, now we need to add the Workstation.
 
 ##Install the Workstation
 
-From the computer/vurtual machine that you are going to use as your workstation execute.
+From the computer/virtual machine that you are going to use as your workstation execute.
 
 This will install chefdk, generate the chef repository template and copy the keys.
 
@@ -263,10 +263,13 @@ Installation steps, just run:
 \label{code:}
 \codecaption{}
 ```bash
-root@chef01:~# aptitude install git rubygems1.9.1 ruby1.9.1-dev build-essential;
-root@chef01:~# mkdir -p /var/www/; cd /var/www/; git clone https://github.com/carlosdcg/chefbyexample_webui; cd chefbyexample_webui;
-root@chef01:~# gem install bundler;
-root@chef01:~# bundle install;
+root@chef01:~# aptitude install git rubygems1.9.1 ruby1.9.1-dev build-essential
+root@chef01:~# mkdir -p /var/www/
+root@chef01:~# cd /var/www/
+root@chef01:/var/www# git clone https://github.com/carlosdcg/chefbyexample_webui
+root@chef01:/var/www# cd chefbyexample_webui
+root@chef01:/var/www# install bundler
+root@chef01:/var/www# bundle install
 ```
 \end{codelisting}
 
@@ -297,21 +300,24 @@ To test in the default port 9292:
 \label{code:}
 \codecaption{}
 ```bash
-root@chef01:~# rackup config.ru
+root@chef01:/var/www/chefbyexample_webui/# rackup config.ru
 ```
 \end{codelisting}
 
 To run as a daemon in another port to test:
+
 \begin{codelisting}
 \label{code:}
 \codecaption{}
 ```bash
-root@chef01:~# rackup config.ru -D -p 1234
+root@chef01:/var/www/chefbyexample_webui/# rackup config.ru -D -p 1234
 ```
 \end{codelisting}
 
 Once you have tested it, to create the init scripts and install on the default run levels.
 
+\begin{codelisting}
+\label{code:}
 \codecaption{}
 ```bash
 root@chef01:~# sudo chmod 755 /var/www/chefbyexample_webui/init/chefbyexample_webui.sh
@@ -330,7 +336,7 @@ If you want to remove the init script just run:
 \label{code:}
 \codecaption{}
 ```bash
-root@chef01:~# ssudo update-rc.d -f chefbyexample_webui remove
+root@chef01:~# sudo update-rc.d -f chefbyexample_webui remove
 ```
 \end{codelisting}
 

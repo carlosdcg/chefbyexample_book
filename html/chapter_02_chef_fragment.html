@@ -140,7 +140,7 @@ cookbook_path            <span class="o">[</span><span class="s2">"#{current_dir
 <div class="code"><div class="highlight"><pre>root@workstation01:~# knife node list
 </pre></div></div></div></div><div id="cid26" data-tralics-id="cid26" class="section" data-number="2.13"><h2><a href="chapter_02_chef_fragment.html#cid26" class="heading hyperref"><span class="number">2.13 </span>Installing the Open Source Web Interface</a></h2>
 <p>First, check the status of this project (Work in progress) as
-Im adapting the web interface to support CHef Server 12</p>
+the web interface is been adapted to support Chef Server 12</p>
 <div id="uid33" data-tralics-id="uid33" class="subsection" data-number="2.13.1"><h3><a href="chapter_02_chef_fragment.html#uid33" class="heading hyperref"><span class="number">2.13.1 </span>Requirements installation</a></h3>
 <p>Installation steps, just run:</p>
 <div class="codelisting" id="code-" data-tralics-id="uid34" data-number="2.14"><div class="heading"><span class="number">Listing 2.14</span> 
@@ -148,13 +148,13 @@ Im adapting the web interface to support CHef Server 12</p>
 <span class="description"></span>
 </div>
 
-<div class="code"><div class="highlight"><pre>aptitude install git rubygems1.9.1 ruby1.9.1-dev build-essential<span class="p">;</span>
-mkdir -p /var/www/<span class="p">;</span> <span class="nb">cd</span> /var/www/<span class="p">;</span> git clone https://github.com/carlosdcg/chefbyexample_webui<span class="p">;</span> <span class="nb">cd </span>chefbyexample_webui<span class="p">;</span>
-gem install bundler<span class="p">;</span>
-bundle install<span class="p">;</span>
+<div class="code"><div class="highlight"><pre>root@chef01:~# aptitude install git rubygems1.9.1 ruby1.9.1-dev build-essential<span class="p">;</span>
+root@chef01:~# mkdir -p /var/www/<span class="p">;</span> <span class="nb">cd</span> /var/www/<span class="p">;</span> git clone https://github.com/carlosdcg/chefbyexample_webui<span class="p">;</span> <span class="nb">cd </span>chefbyexample_webui<span class="p">;</span>
+root@chef01:~# gem install bundler<span class="p">;</span>
+root@chef01:~# bundle install<span class="p">;</span>
 </pre></div></div></div></div>
 <div id="uid35" data-tralics-id="uid35" class="subsection" data-number="2.13.2"><h3><a href="chapter_02_chef_fragment.html#uid35" class="heading hyperref"><span class="number">2.13.2 </span>Configure the default paramenters</a></h3>
-<p>Configure the web app in /var/www/chefbyexample_webui/config/application.rb</p>
+<p>Configure the web app (/var/www/chefbyexample_webui/config/application.rb)</p>
 <div class="codelisting" id="code-" data-tralics-id="uid36" data-number="2.15"><div class="heading"><span class="number">Listing 2.15</span> 
 
 <span class="description"></span>
@@ -177,25 +177,30 @@ bundle install<span class="p">;</span>
 <span class="description"></span>
 </div>
 
-<div class="code"><div class="highlight"><pre>rackup config.ru
+<div class="code"><div class="highlight"><pre>root@chef01:~# rackup config.ru
 </pre></div></div></div><p>To run as a daemon in another port to test:</p>
 <div class="codelisting" id="code-" data-tralics-id="uid39" data-number="2.17"><div class="heading"><span class="number">Listing 2.17</span> 
 
 <span class="description"></span>
 </div>
 
-<div class="code"><div class="highlight"><pre>rackup config.ru -D -p 1234
-</pre></div></div></div><p>Once you have tested it, to create the init scripts and install the run levels—</p>
+<div class="code"><div class="highlight"><pre>root@chef01:~# rackup config.ru -D -p 1234
+</pre></div></div></div><p>Once you have tested it, to create the init scripts and install on the default run levels.</p>
 <div class="codelisting" id="code-" data-tralics-id="uid40" data-number="2.18"><div class="heading"><span class="number">Listing 2.18</span> 
 
 <span class="description"></span>
 </div>
 
-<div class="code"><div class="highlight"><pre><span class="c">#TO remove the script from the default run-levels</span>
-<span class="c">#sudo update-rc.d -f chefbyexample_webui remove</span>
-sudo chmod <span class="m">755</span> /var/www/chefbyexample_webui/init/chefbyexample_webui.sh
-ln -s /var/www/chefbyexample_webui/init/chefbyexample_webui.sh /etc/init.d/chefbyexample_webui
-sudo chmod <span class="m">755</span> /etc/init.d/chefbyexample_webui
-sudo chown root:root /etc/init.d/chefbyexample_webui
-sudo update-rc.d chefbyexample_webui defaults
+<div class="code"><div class="highlight"><pre>root@chef01:~# sudo chmod <span class="m">755</span> /var/www/chefbyexample_webui/init/chefbyexample_webui.sh
+root@chef01:~# ln -s /var/www/chefbyexample_webui/init/chefbyexample_webui.sh /etc/init.d/chefbyexample_webui
+root@chef01:~# sudo chmod <span class="m">755</span> /etc/init.d/chefbyexample_webui
+root@chef01:~# sudo chown root:root /etc/init.d/chefbyexample_webui
+root@chef01:~# sudo update-rc.d chefbyexample_webui defaults
+</pre></div></div></div><p>If you want to remove the init script just run:</p>
+<div class="codelisting" id="code-" data-tralics-id="uid41" data-number="2.19"><div class="heading"><span class="number">Listing 2.19</span> 
+
+<span class="description"></span>
+</div>
+
+<div class="code"><div class="highlight"><pre>root@chef01:~# ssudo update-rc.d -f chefbyexample_webui remove
 </pre></div></div></div></div></div>
