@@ -255,7 +255,7 @@ root@workstation01:~# knife node list
 ## Installing the Open Source Web Interface ##
 
 First, check the status of this project (Work in progress) as 
-Im adapting the web interface to support CHef Server 12
+the web interface is been adapted to support Chef Server 12
 
 ### Requirements installation ###
 Installation steps, just run:
@@ -263,16 +263,16 @@ Installation steps, just run:
 \label{code:}
 \codecaption{}
 ```bash
-aptitude install git rubygems1.9.1 ruby1.9.1-dev build-essential;
-mkdir -p /var/www/; cd /var/www/; git clone https://github.com/carlosdcg/chefbyexample_webui; cd chefbyexample_webui;
-gem install bundler;
-bundle install;
+root@chef01:~# aptitude install git rubygems1.9.1 ruby1.9.1-dev build-essential;
+root@chef01:~# mkdir -p /var/www/; cd /var/www/; git clone https://github.com/carlosdcg/chefbyexample_webui; cd chefbyexample_webui;
+root@chef01:~# gem install bundler;
+root@chef01:~# bundle install;
 ```
 \end{codelisting}
 
 
 ### Configure the default paramenters ###
-Configure the web app in /var/www/chefbyexample_webui/config/application.rb
+Configure the web app (/var/www/chefbyexample_webui/config/application.rb)
 
 \begin{codelisting}
 \label{code:}
@@ -297,7 +297,7 @@ To test in the default port 9292:
 \label{code:}
 \codecaption{}
 ```bash
-rackup config.ru
+root@chef01:~# rackup config.ru
 ```
 \end{codelisting}
 
@@ -306,26 +306,33 @@ To run as a daemon in another port to test:
 \label{code:}
 \codecaption{}
 ```bash
-rackup config.ru -D -p 1234
+root@chef01:~# rackup config.ru -D -p 1234
 ```
 \end{codelisting}
 
-Once you have tested it, to create the init scripts and install the run levels---
+Once you have tested it, to create the init scripts and install on the default run levels.
+
+\codecaption{}
+```bash
+root@chef01:~# sudo chmod 755 /var/www/chefbyexample_webui/init/chefbyexample_webui.sh
+root@chef01:~# ln -s /var/www/chefbyexample_webui/init/chefbyexample_webui.sh /etc/init.d/chefbyexample_webui
+root@chef01:~# sudo chmod 755 /etc/init.d/chefbyexample_webui
+root@chef01:~# sudo chown root:root /etc/init.d/chefbyexample_webui
+root@chef01:~# sudo update-rc.d chefbyexample_webui defaults
+```
+\end{codelisting}
+
+
+If you want to remove the init script just run:
+
+
 \begin{codelisting}
 \label{code:}
 \codecaption{}
 ```bash
-#TO remove the script from the default run-levels
-#sudo update-rc.d -f chefbyexample_webui remove
-sudo chmod 755 /var/www/chefbyexample_webui/init/chefbyexample_webui.sh
-ln -s /var/www/chefbyexample_webui/init/chefbyexample_webui.sh /etc/init.d/chefbyexample_webui
-sudo chmod 755 /etc/init.d/chefbyexample_webui
-sudo chown root:root /etc/init.d/chefbyexample_webui
-sudo update-rc.d chefbyexample_webui defaults
+root@chef01:~# ssudo update-rc.d -f chefbyexample_webui remove
 ```
 \end{codelisting}
-
-
 
 
 
