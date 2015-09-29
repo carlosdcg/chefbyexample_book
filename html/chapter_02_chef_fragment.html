@@ -87,25 +87,26 @@ root@chef01:~# chef-server-ctl reconfigure<span class="p">;</span>
 </pre></div></div></div><div class="graphics image"><img src="images/figures/12_install_chef_finished.PNG" alt="images/figures/12_install_chef_finished" /></div>
 <p>Now the Chef SErver is fully operative, now we need to add the Workstation.</p>
 </div><div id="cid24" data-tralics-id="cid24" class="section" data-number="2.11"><h2><a href="chapter_02_chef_fragment.html#cid24" class="heading hyperref"><span class="number">2.11 </span>Install the Workstation</a></h2>
+<p>From the computer/vurtual machine that you are going to use as your workstation execute.</p>
+<p>This will install chefdk, generate the chef repository template and copy the keys.</p>
 <div class="codelisting" id="code-" data-tralics-id="uid28" data-number="2.9"><div class="heading"><span class="number">Listing 2.9</span> 
 
 <span class="description"></span>
 </div>
 
-<div class="code"><div class="highlight"><pre>sudo wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.7.0-1_amd64.deb
+<div class="code"><div class="highlight"><pre>root@workstation01:~# sudo wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.7.0-1_amd64.deb
+root@workstation01:~# sudo dpkg -i chefdk_*.deb
+root@workstation01:~# sudo chef generate repo chef-repo
+root@workstation01:~# mkdir ~/chef-repo/.chef
+root@workstation01:~# scp root@chef01.chefbyexample.com:/root/admin.pem ~/chef-repo/.chef
+root@workstation01:~# scp root@chef01.chefbyexample.com:/root/chefbyexample-validator.pem ~/chef-repo/.chef
+</pre></div></div></div><p>Now update the knife config file (root@workstation01:<span class="inline_math">\( \sim  \)</span># nano <span class="inline_math">\( \sim  \)</span>/chef-repo/.chef/knife.rb)</p>
+<div class="codelisting" id="code-" data-tralics-id="uid29" data-number="2.10"><div class="heading"><span class="number">Listing 2.10</span> 
 
-sudo dpkg -i chefdk_*.deb
+<span class="description"></span>
+</div>
 
-sudo chef generate repo chef-repo
-
-mkdir ~/chef-repo/.chef
-scp root@chef01.chefbyexample.com:/root/admin.pem ~/chef-repo/.chef
-scp root@chef01.chefbyexample.com:/root/chefbyexample-validator.pem ~/chef-repo/.chef
-
-nano ~/chef-repo/.chef/knife.rb
-
-
-<span class="nv">current_dir</span> <span class="o">=</span> File.dirname<span class="o">(</span>__FILE__<span class="o">)</span>
+<div class="code"><div class="highlight"><pre><span class="nv">current_dir</span> <span class="o">=</span> File.dirname<span class="o">(</span>__FILE__<span class="o">)</span>
 log_level                :info
 log_location             STDOUT
 node_name                <span class="s2">"admin"</span>
@@ -115,17 +116,34 @@ validation_key           <span class="s2">"#{current_dir}/chefbyexample-validato
 chef_server_url          <span class="s2">"https://chef01.chefbyexample.com/organizations/chefbyexample"</span>
 syntax_check_cache_path  <span class="s2">"#{ENV['HOME']}/.chef/syntaxcache"</span>
 cookbook_path            <span class="o">[</span><span class="s2">"#{current_dir}/../cookbooks"</span><span class="o">]</span>
+</pre></div></div></div><p>Get the certificate from the chef server</p>
+<div class="codelisting" id="code-" data-tralics-id="uid30" data-number="2.11"><div class="heading"><span class="number">Listing 2.11</span> 
 
+<span class="description"></span>
+</div>
 
-knife ssl fetch
+<div class="code"><div class="highlight"><pre>root@workstation01:~# knife ssl fetch
+</pre></div></div></div></div><div id="cid25" data-tralics-id="cid25" class="section" data-number="2.12"><h2><a href="chapter_02_chef_fragment.html#cid25" class="heading hyperref"><span class="number">2.12 </span>Bootstraping nodes</a></h2>
+<p>Bootsrap one node to test if everithing is working fine.</p>
+<div class="codelisting" id="code-" data-tralics-id="uid31" data-number="2.12"><div class="heading"><span class="number">Listing 2.12</span> 
 
-Bootstraping the first node
+<span class="description"></span>
+</div>
 
-knife bootstrap node01.chefbyexample.com -N node01
-</pre></div></div></div></div><div id="cid25" data-tralics-id="cid25" class="section" data-number="2.12"><h2><a href="chapter_02_chef_fragment.html#cid25" class="heading hyperref"><span class="number">2.12 </span>Installing the Open Source Web Interface</a></h2>
-<div id="uid29" data-tralics-id="uid29" class="subsection" data-number="2.12.1"><h3><a href="chapter_02_chef_fragment.html#uid29" class="heading hyperref"><span class="number">2.12.1 </span>Requirements installation</a></h3>
+<div class="code"><div class="highlight"><pre>root@workstation01:~# knife bootstrap node01.chefbyexample.com -N node01
+</pre></div></div></div><p>After this, list the registered nodes.</p>
+<div class="codelisting" id="code-" data-tralics-id="uid32" data-number="2.13"><div class="heading"><span class="number">Listing 2.13</span> 
+
+<span class="description"></span>
+</div>
+
+<div class="code"><div class="highlight"><pre>root@workstation01:~# knife node list
+</pre></div></div></div></div><div id="cid26" data-tralics-id="cid26" class="section" data-number="2.13"><h2><a href="chapter_02_chef_fragment.html#cid26" class="heading hyperref"><span class="number">2.13 </span>Installing the Open Source Web Interface</a></h2>
+<p>First, check the status of this project (Work in progress) as
+Im adapting the web interface to support CHef Server 12</p>
+<div id="uid33" data-tralics-id="uid33" class="subsection" data-number="2.13.1"><h3><a href="chapter_02_chef_fragment.html#uid33" class="heading hyperref"><span class="number">2.13.1 </span>Requirements installation</a></h3>
 <p>Installation steps, just run:</p>
-<div class="codelisting" id="code-" data-tralics-id="uid30" data-number="2.10"><div class="heading"><span class="number">Listing 2.10</span> 
+<div class="codelisting" id="code-" data-tralics-id="uid34" data-number="2.14"><div class="heading"><span class="number">Listing 2.14</span> 
 
 <span class="description"></span>
 </div>
@@ -135,9 +153,9 @@ mkdir -p /var/www/<span class="p">;</span> <span class="nb">cd</span> /var/www/<
 gem install bundler<span class="p">;</span>
 bundle install<span class="p">;</span>
 </pre></div></div></div></div>
-<div id="uid31" data-tralics-id="uid31" class="subsection" data-number="2.12.2"><h3><a href="chapter_02_chef_fragment.html#uid31" class="heading hyperref"><span class="number">2.12.2 </span>Configure the default paramenters</a></h3>
+<div id="uid35" data-tralics-id="uid35" class="subsection" data-number="2.13.2"><h3><a href="chapter_02_chef_fragment.html#uid35" class="heading hyperref"><span class="number">2.13.2 </span>Configure the default paramenters</a></h3>
 <p>Configure the web app in /var/www/chefbyexample_webui/config/application.rb</p>
-<div class="codelisting" id="code-" data-tralics-id="uid32" data-number="2.11"><div class="heading"><span class="number">Listing 2.11</span> 
+<div class="codelisting" id="code-" data-tralics-id="uid36" data-number="2.15"><div class="heading"><span class="number">Listing 2.15</span> 
 
 <span class="description"></span>
 </div>
@@ -151,24 +169,24 @@ bundle install<span class="p">;</span>
 <span class="c1">#This app only supports one organization, like the Open Source Chef Server 11</span>
 <span class="n">config</span><span class="o">.</span><span class="n">default_organization</span> <span class="o">=</span> <span class="s2">"organizations/chefbyexample/"</span>
 </pre></div></div></div></div>
-<div id="uid33" data-tralics-id="uid33" class="subsection" data-number="2.12.3"><h3><a href="chapter_02_chef_fragment.html#uid33" class="heading hyperref"><span class="number">2.12.3 </span>Use the interface on demand or install it as a service</a></h3>
+<div id="uid37" data-tralics-id="uid37" class="subsection" data-number="2.13.3"><h3><a href="chapter_02_chef_fragment.html#uid37" class="heading hyperref"><span class="number">2.13.3 </span>Use the interface on demand or install it as a service</a></h3>
 <p>Once the Web UI is installed, from /var/www/chefbyexample_webui run:</p>
 <p>To test in the default port 9292:</p>
-<div class="codelisting" id="code-" data-tralics-id="uid34" data-number="2.12"><div class="heading"><span class="number">Listing 2.12</span> 
+<div class="codelisting" id="code-" data-tralics-id="uid38" data-number="2.16"><div class="heading"><span class="number">Listing 2.16</span> 
 
 <span class="description"></span>
 </div>
 
 <div class="code"><div class="highlight"><pre>rackup config.ru
 </pre></div></div></div><p>To run as a daemon in another port to test:</p>
-<div class="codelisting" id="code-" data-tralics-id="uid35" data-number="2.13"><div class="heading"><span class="number">Listing 2.13</span> 
+<div class="codelisting" id="code-" data-tralics-id="uid39" data-number="2.17"><div class="heading"><span class="number">Listing 2.17</span> 
 
 <span class="description"></span>
 </div>
 
 <div class="code"><div class="highlight"><pre>rackup config.ru -D -p 1234
 </pre></div></div></div><p>Once you have tested it, to create the init scripts and install the run levels—</p>
-<div class="codelisting" id="code-" data-tralics-id="uid36" data-number="2.14"><div class="heading"><span class="number">Listing 2.14</span> 
+<div class="codelisting" id="code-" data-tralics-id="uid40" data-number="2.18"><div class="heading"><span class="number">Listing 2.18</span> 
 
 <span class="description"></span>
 </div>

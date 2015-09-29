@@ -130,23 +130,29 @@ Now the Chef SErver is fully operative, now we need to add the Workstation.
 
 \section{Install the Workstation}
 
+From the computer/vurtual machine that you are going to use as your workstation execute.
+
+This will install chefdk, generate the chef repository template and copy the keys.
+
 \begin{codelisting}
 \label{code:}
 \codecaption{}
 \begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
-sudo wget https://opscode\PYZhy{}omnibus\PYZhy{}packages.s3.amazonaws.com/ubuntu/12.04/x86\PYZus{}64/chefdk\PYZus{}0.7.0\PYZhy{}1\PYZus{}amd64.deb
+root@workstation01:\PYZti{}\PYZsh{} sudo wget https://opscode\PYZhy{}omnibus\PYZhy{}packages.s3.amazonaws.com/ubuntu/12.04/x86\PYZus{}64/chefdk\PYZus{}0.7.0\PYZhy{}1\PYZus{}amd64.deb
+root@workstation01:\PYZti{}\PYZsh{} sudo dpkg \PYZhy{}i chefdk\PYZus{}*.deb
+root@workstation01:\PYZti{}\PYZsh{} sudo chef generate repo chef\PYZhy{}repo
+root@workstation01:\PYZti{}\PYZsh{} mkdir \PYZti{}/chef\PYZhy{}repo/.chef
+root@workstation01:\PYZti{}\PYZsh{} scp root@chef01.chefbyexample.com:/root/admin.pem \PYZti{}/chef\PYZhy{}repo/.chef
+root@workstation01:\PYZti{}\PYZsh{} scp root@chef01.chefbyexample.com:/root/chefbyexample\PYZhy{}validator.pem \PYZti{}/chef\PYZhy{}repo/.chef
+\end{Verbatim}
+\end{codelisting}
 
-sudo dpkg \PYZhy{}i chefdk\PYZus{}*.deb
+Now update the knife config file (root@workstation01:\ensuremath{\sim}\# nano \ensuremath{\sim}/chef-repo/.chef/knife.rb)
 
-sudo chef generate repo chef\PYZhy{}repo
-
-mkdir \PYZti{}/chef\PYZhy{}repo/.chef
-scp root@chef01.chefbyexample.com:/root/admin.pem \PYZti{}/chef\PYZhy{}repo/.chef
-scp root@chef01.chefbyexample.com:/root/chefbyexample\PYZhy{}validator.pem \PYZti{}/chef\PYZhy{}repo/.chef
-
-nano \PYZti{}/chef\PYZhy{}repo/.chef/knife.rb
-
-
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+\begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
 \PY{n+nv}{current\PYZus{}dir} \PY{o}{=} File.dirname\PY{o}{(}\PYZus{}\PYZus{}FILE\PYZus{}\PYZus{}\PY{o}{)}
 log\PYZus{}level                :info
 log\PYZus{}location             STDOUT
@@ -157,17 +163,45 @@ validation\PYZus{}key           \PY{l+s+s2}{\PYZdq{}\PYZsh{}\PYZob{}current\PYZu
 chef\PYZus{}server\PYZus{}url          \PY{l+s+s2}{\PYZdq{}https://chef01.chefbyexample.com/organizations/chefbyexample\PYZdq{}}
 syntax\PYZus{}check\PYZus{}cache\PYZus{}path  \PY{l+s+s2}{\PYZdq{}\PYZsh{}\PYZob{}ENV[\PYZsq{}HOME\PYZsq{}]\PYZcb{}/.chef/syntaxcache\PYZdq{}}
 cookbook\PYZus{}path            \PY{o}{[}\PY{l+s+s2}{\PYZdq{}\PYZsh{}\PYZob{}current\PYZus{}dir\PYZcb{}/../cookbooks\PYZdq{}}\PY{o}{]}
+\end{Verbatim}
+\end{codelisting}
 
+Get the certificate from the chef server
 
-knife ssl fetch
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+\begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
+root@workstation01:\PYZti{}\PYZsh{} knife ssl fetch
+\end{Verbatim}
+\end{codelisting}
 
-Bootstraping the first node
+\section{Bootstraping nodes}
 
-knife bootstrap node01.chefbyexample.com \PYZhy{}N node01
+Bootsrap one node to test if everithing is working fine.
+
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+\begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
+root@workstation01:\PYZti{}\PYZsh{} knife bootstrap node01.chefbyexample.com \PYZhy{}N node01
+\end{Verbatim}
+\end{codelisting}
+
+After this, list the registered nodes.
+
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+\begin{Verbatim}[fontsize=\relsize{-2.5},fontseries=b,commandchars=\\\{\}]
+root@workstation01:\PYZti{}\PYZsh{} knife node list
 \end{Verbatim}
 \end{codelisting}
 
 \section{Installing the Open Source Web Interface}
+
+First, check the status of this project (Work in progress) as 
+Im adapting the web interface to support CHef Server 12
 
 \subsection{Requirements installation}
 
