@@ -155,24 +155,34 @@ Now the Chef SErver is fully operative, now we need to add the Workstation.
 
 ##Install the Workstation
 
+From the computer/vurtual machine that you are going to use as your workstation execute.
+
+This will install chefdk, generate the chef repository template and copy the keys.
 
 \begin{codelisting}
 \label{code:}
 \codecaption{}
 ```bash
+root@workstation01:~# sudo wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.7.0-1_amd64.deb
+root@workstation01:~# sudo dpkg -i chefdk_*.deb
+root@workstation01:~# sudo chef generate repo chef-repo
+root@workstation01:~# mkdir ~/chef-repo/.chef
+root@workstation01:~# scp root@chef01.chefbyexample.com:/root/admin.pem ~/chef-repo/.chef
+root@workstation01:~# scp root@chef01.chefbyexample.com:/root/chefbyexample-validator.pem ~/chef-repo/.chef
+```
+\end{codelisting}
 
-sudo wget https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.7.0-1_amd64.deb
 
-sudo dpkg -i chefdk_*.deb
 
-sudo chef generate repo chef-repo
 
-mkdir ~/chef-repo/.chef
-scp root@chef01.chefbyexample.com:/root/admin.pem ~/chef-repo/.chef
-scp root@chef01.chefbyexample.com:/root/chefbyexample-validator.pem ~/chef-repo/.chef
 
-nano ~/chef-repo/.chef/knife.rb
+Now update the knife config file (root@workstation01:~# nano ~/chef-repo/.chef/knife.rb)
 
+
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+```bash
 
 current_dir = File.dirname(__FILE__)
 log_level                :info
@@ -185,16 +195,56 @@ chef_server_url          "https://chef01.chefbyexample.com/organizations/chefbye
 syntax_check_cache_path  "#{ENV['HOME']}/.chef/syntaxcache"
 cookbook_path            ["#{current_dir}/../cookbooks"]
 
+```
+\end{codelisting}
 
-knife ssl fetch
+Get the certificate from the chef server
 
-Bootstraping the first node
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+```bash
 
-knife bootstrap node01.chefbyexample.com -N node01
-
+root@workstation01:~# knife ssl fetch
 
 ```
 \end{codelisting}
+
+
+
+
+
+
+
+##Bootstraping nodes
+
+
+Bootsrap one node to test if everithing is working fine.
+
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+```bash
+
+root@workstation01:~# knife bootstrap node01.chefbyexample.com -N node01
+
+```
+\end{codelisting}
+
+
+After this, list the registered nodes.
+
+
+\begin{codelisting}
+\label{code:}
+\codecaption{}
+```bash
+
+root@workstation01:~# knife node list
+
+```
+\end{codelisting}
+
 
 
 
